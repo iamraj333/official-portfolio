@@ -55,6 +55,9 @@ export default function Register() {
 
             const data = await response.json()
             if (data.internetError) {
+                showToast("error", data.internetError)
+            }
+            else {
                 if (data.success) {
                     showToast('success', `${data.success}`)
                     setRegisterData({
