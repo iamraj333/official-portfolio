@@ -10,7 +10,7 @@
 ![TinyMCE](https://img.shields.io/badge/TinyMCE-1B1B1B?style=for-the-badge&logo=tinymce&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
 
-A modern, full-stack **Portfolio & Blogging Platform** built using the **MERN Stack** with **Vite**, **MongoDB Atlas**, **Tailwind CSS**, and **JWT Authentication**. The platform serves as a professional portfolio while also providing a complete blogging system, user management, messaging, and an admin dashboard.
+A modern, full-stack **Portfolio & Blogging Platform** built using the **MERN Stack** with **Vite React**, **MongoDB Atlas**, **Tailwind CSS**, and **JWT Authentication**. The platform serves as a professional portfolio while also providing a complete blogging system, user management, messaging, and an admin dashboard.
 
 ![Screenshot](screenshots/homePage.png)
 
