@@ -266,44 +266,34 @@ export default function ReadBlog() {
 
 
 
-                                    <div className="flex justify-between">
-                                        <div className="flex items-center gap-3 text-sm text-gray-500">
-
+                                    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                                        {/* Left Section */}
+                                        <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500">
                                             <span>
-                                                {new Date(blogContent.createdAt).toLocaleDateString(
-                                                    "en-US",
-                                                    {
-                                                        day: "2-digit",
-                                                        month: "long",
-                                                        year: "numeric",
-                                                    }
-                                                )}
+                                                {new Date(blogContent.createdAt).toLocaleDateString("en-US", {
+                                                    day: "2-digit",
+                                                    month: "long",
+                                                    year: "numeric",
+                                                })}
                                             </span>
 
+                                            <span className="hidden sm:inline text-gray-700">•</span>
 
-                                            <span className="text-gray-700">
-                                                •
-                                            </span>
-
-
-                                            <span>
-                                                By Author
-                                            </span>
-
-
+                                            <span>By Author</span>
                                         </div>
 
-                                        <div className="flex items-center gap-3">
+                                        {/* Right Section */}
+                                        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                                             {/* Like */}
                                             <button
                                                 onClick={(e) => LikeBtn(e, blogContent._id)}
                                                 className={`flex items-center gap-2 rounded-full px-3 py-2 transition-all duration-200
-                                                    ${isLike || blogContent?.likes?.length>0
+                ${isLike || blogContent?.likes?.length > 0
                                                         ? "bg-blue-500/20 text-blue-400"
-                                                        : "bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white"
+                                                        : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-white"
                                                     }`}
                                             >
-                                                <HiThumbUp className="text-xl" />
+                                                <HiThumbUp className="text-lg sm:text-xl" />
                                                 <span className="text-sm font-medium">
                                                     {blogContent?.likes?.length || 0}
                                                 </span>
@@ -313,12 +303,12 @@ export default function ReadBlog() {
                                             <button
                                                 onClick={(e) => DislikeBtn(e, blogContent._id)}
                                                 className={`flex items-center gap-2 rounded-full px-3 py-2 transition-all duration-200
-                                                    ${isDislike || blogContent?.dislikes?.length>0
+                ${isDislike || blogContent?.dislikes?.length > 0
                                                         ? "bg-red-500/20 text-red-400"
-                                                        : "bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white"
+                                                        : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-white"
                                                     }`}
                                             >
-                                                <HiThumbDown className="text-xl" />
+                                                <HiThumbDown className="text-lg sm:text-xl" />
                                                 <span className="text-sm font-medium">
                                                     {blogContent?.dislikes?.length || 0}
                                                 </span>
@@ -330,12 +320,12 @@ export default function ReadBlog() {
                                                 to={`/blogs/read/${blogContent._id}/#userComments`}
                                                 className="rounded-full bg-zinc-800 p-2 text-zinc-300 transition-all duration-200 hover:bg-zinc-700 hover:text-white"
                                             >
-                                                <BiSolidCommentDetail className="text-xl" />
+                                                <BiSolidCommentDetail className="text-lg sm:text-xl" />
                                             </HashLink>
 
                                             {/* More */}
                                             <button className="rounded-full bg-zinc-800 p-2 text-zinc-300 transition-all duration-200 hover:bg-zinc-700 hover:text-white">
-                                                <IoMdMore className="text-xl" />
+                                                <IoMdMore className="text-lg sm:text-xl" />
                                             </button>
                                         </div>
                                     </div>
