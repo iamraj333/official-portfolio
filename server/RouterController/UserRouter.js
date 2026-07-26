@@ -23,12 +23,12 @@ Router.post("/register", async (req, res) => {
 
     try {
         if (!data.name || !data.email || !data.password || !data.confirmPassword) {
-            res.json({ error: "fill the form properly" })
+            return res.json({ error: "fill the form properly" })
         }
         else {
             const isEmailExists = await WebUser.findOne({ email: data.email });
             if (isEmailExists) {
-                res.json({ error: "Email is already exists" })
+                return res.json({ error: "Email is already exists" })
                 // process.exit(0)
 
             }
@@ -37,12 +37,12 @@ Router.post("/register", async (req, res) => {
                 //encrypting the password
                 const hashedPassword = await bcrypt.hash(data.password, 10)
                 const createUser = await WebUser.create({ name: data.name, email: data.email, password: hashedPassword })
-                res.json({ success: "account created successfully" })
+                return res.json({ success: "account created successfully" })
             }
         }
     }
     catch (e) {
-        res.status(200).json({ internetError: "Internet connection failed" })
+        return res.status(200).json({ internetError: "Internet connection failed" })
     }
 
 
