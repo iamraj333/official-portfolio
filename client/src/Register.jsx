@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import Loading from "./Loading";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 import { useContext } from "react";
@@ -91,6 +92,9 @@ export default function Register() {
 
     return (
         <>
+        {
+            isLoading && <Loading/>
+        }
             <Navbar />
 
             <div className="min-h-screen flex flex-col items-center justify-center bg-[#0b0f17] px-4 py-6">
