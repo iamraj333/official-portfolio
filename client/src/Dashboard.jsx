@@ -299,273 +299,340 @@ export default function Dashboard() {
 
             {
                 isInternet ? (
-                    <div className="min-h-screen bg-[#0b0f17] text-white py-10 px-4">
+                    <div className="min-h-screen bg-[#0b0f17] text-white py-6 sm:py-8 lg:py-10">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                        {/* HEADER */}
-                        <div className="max-w-6xl mx-auto mb-10">
-                            <h1 className="text-4xl font-bold">
-                                Welcome Back, <span className="text-[#3b82f6]">{currentUser ? currentUser?.name : "User"}</span>
-                            </h1>
-                            <p className="text-gray-400 mt-2">
-                                Manage your courses, products, collaborations and messages.
-                            </p>
-                        </div>
-
-                        {/* STATS */}
-                        <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-5 mb-10">
-
-                            <div className="bg-[#111827] border border-gray-800 rounded-xl p-5">
-                                <h3 className="text-gray-400 text-sm">Total Message</h3>
-                                <p className="text-3xl font-bold mt-2">{currentContactMessage.length + currentNormalMessage.length}</p>
-                            </div>
-
-                            <div className="bg-[#111827] border border-gray-800 rounded-xl p-5">
-                                <h3 className="text-gray-400 text-sm">Colloboration</h3>
-                                <p className="text-3xl font-bold mt-2">0</p>
-                            </div>
-
-                            <div className="bg-[#111827] border border-gray-800 rounded-xl p-5">
-                                <h3 className="text-gray-400 text-sm">Comments</h3>
-                                <p className="text-3xl font-bold mt-2">{allComments.length || 0}</p>
-                            </div>
-
-                            <div className="bg-[#111827] border border-gray-800 rounded-xl p-5">
-                                <h3 className="text-gray-400 text-sm">Liked Blogs</h3>
-                                <p className="text-3xl font-bold mt-2">{allLikedBlog.length || 0}</p>
-                            </div>
-
-                        </div>
-
-                        {/* COLLABORATION + CONTACT */}
-                        {/* COLLABORATION + CONTACT */}
-                        <div className="max-w-6xl mx-auto px-4 py-10">
-
-                            <h1 className="text-3xl font-bold text-white mb-8">
-                                Your Messages
-                            </h1>
-
-                            <div className="grid gap-8 lg:grid-cols-2 items-start">
-
-                                {/* Contact Messages */}
-                                <div className="bg-[#0f172a] border border-gray-800 rounded-xl p-6">
-
-                                    <div className="flex justify-between items-center mb-5">
-                                        <h2 className="text-xl font-semibold text-white">
-                                            Contact Messages
-                                        </h2>
-
-                                        <span className="bg-[#3b82f6]/10 text-[#60a5fa] px-3 py-1 rounded-md text-sm">
-                                            {currentContactMessage?.length || 0}
-                                        </span>
-                                    </div>
-
-                                    <div className="space-y-4">
-
-                                        {currentContactMessage?.length ? (
-                                            currentContactMessage.map((contact) => (
-                                                <div
-                                                    key={contact._id}
-                                                    className="border border-gray-800 rounded-lg p-4 hover:border-[#3b82f6] transition-colors"
-                                                >
-                                                    <div className="flex flex-wrap justify-between gap-2 items-center">
-                                                        <p className="text-xs text-gray-500 mb-2">
-                                                            {new Date(contact.createdAt).toLocaleDateString(
-                                                                "en-IN",
-                                                                {
-                                                                    day: "numeric",
-                                                                    month: "short",
-                                                                    year: "numeric",
-                                                                }
-                                                            )}
-                                                        </p>
-
-                                                        <button onClick={(e) => DeleteContactHandler(e, contact._id)} className=" bg-blue-500/80 transition-all duration-200 hover:bg-blue-500/30 rounded-full hover:text-white p-1 text-sm px-3">Delete</button>
-                                                    </div>
-
-                                                    <h3 className="text-lg font-medium text-white mb-2">
-                                                        {contact.subject}
-                                                    </h3>
-
-                                                    <p className="text-gray-400 text-sm">
-                                                        {contact.message}
-                                                    </p>
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <p className="text-gray-500 text-center py-6">
-                                                No Contact Messages
-                                            </p>
-                                        )}
-
-                                    </div>
-
-                                </div>
-
-                                {/* Normal Messages */}
-                                <div className="bg-[#0f172a] border border-gray-800 rounded-xl p-6">
-
-                                    <div className="flex justify-between items-center mb-5">
-                                        <h2 className="text-xl font-semibold text-white">
-                                            Normal Messages
-                                        </h2>
-
-                                        <span className="bg-[#3b82f6]/10 text-[#60a5fa] px-3 py-1 rounded-md text-sm">
-                                            {currentNormalMessage?.length || 0}
-                                        </span>
-                                    </div>
-
-                                    <div className="space-y-4">
-
-                                        {currentNormalMessage?.length ? (
-                                            currentNormalMessage.map((normal) => (
-                                                <div
-                                                    key={normal._id}
-                                                    className="border border-gray-800 rounded-lg p-4 hover:border-[#3b82f6] transition-colors"
-                                                >
-                                                    <div className="flex justify-between items-centerflex-wrap gap-2">
-                                                        <p className="text-xs text-gray-500 mb-2">
-                                                            {new Date(normal.createdAt).toLocaleDateString(
-                                                                "en-IN",
-                                                                {
-                                                                    day: "numeric",
-                                                                    month: "short",
-                                                                    year: "numeric",
-                                                                }
-                                                            )}
-                                                        </p>
-
-                                                        <button onClick={(e) => DeleteMessageHandler(e, normal._id)} className=" bg-blue-500/80 transition-all duration-200 hover:bg-blue-500/30 rounded-full hover:text-white p-1 text-sm px-3">Delete</button>
-                                                    </div>
-
-                                                    <h3 className="text-lg font-medium text-white mb-2">
-                                                        {normal.subject}
-                                                    </h3>
-
-                                                    <p className="text-gray-400 text-sm">
-                                                        {normal.message}
-                                                    </p>
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <p className="text-gray-500 text-center py-6">
-                                                No Messages
-                                            </p>
-                                        )}
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        {/* BLOG COMMENTS */}
-                        <div className="p-6 mt-10 max-w-6xl mx-auto">
-
-                            <div className="flex justify-between items-center mb-5">
-                                <h1 className="text-3xl font-bold text-white mb-8">
-                                    Blog Comments
+                            {/* HEADER */}
+                            <div className="mb-10">
+                                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight">
+                                    Welcome Back,{" "}
+                                    <span className="text-[#3b82f6]">
+                                        {currentUser ? currentUser.name : "User"}
+                                    </span>
                                 </h1>
 
-                                <span className="bg-[#3b82f6]/10 text-[#60a5fa] px-3 py-1 rounded-md text-sm">
-                                    Comments: {allComments?.length || 0}
-                                </span>
+                                <p className="text-gray-400 mt-2 text-sm sm:text-base">
+                                    Manage your courses, products, collaborations and messages.
+                                </p>
                             </div>
 
-                            <div className="flex flex-wrap gap-4 items-center">
+                            {/* STATS */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-10">
 
-                                {allComments?.length > 0 ? (
-                                    allComments.map((comment) => (
-                                        <div
-                                            key={comment._id}
-                                            className="w-1/3 lg:w-[350px] border border-gray-800 rounded-lg p-4 hover:border-[#3b82f6] transition-colors"
-                                        >
-                                            <div className="flex flex-wrap justify-between gap-2 items-center">
-                                                <p className="text-xs text-gray-500 mb-2">
-                                                    {new Date(comment.createdAt).toLocaleDateString(
-                                                        "en-IN",
-                                                        {
-                                                            day: "numeric",
-                                                            month: "short",
-                                                            year: "numeric",
+                                <div className="bg-[#111827] border border-gray-800 rounded-xl p-5">
+                                    <h3 className="text-gray-400 text-sm">Total Messages</h3>
+                                    <p className="text-2xl sm:text-3xl font-bold mt-2">
+                                        {currentContactMessage.length + currentNormalMessage.length}
+                                    </p>
+                                </div>
+
+                                <div className="bg-[#111827] border border-gray-800 rounded-xl p-5">
+                                    <h3 className="text-gray-400 text-sm">Collaboration</h3>
+                                    <p className="text-2xl sm:text-3xl font-bold mt-2">0</p>
+                                </div>
+
+                                <div className="bg-[#111827] border border-gray-800 rounded-xl p-5">
+                                    <h3 className="text-gray-400 text-sm">Comments</h3>
+                                    <p className="text-2xl sm:text-3xl font-bold mt-2">
+                                        {allComments.length || 0}
+                                    </p>
+                                </div>
+
+                                <div className="bg-[#111827] border border-gray-800 rounded-xl p-5">
+                                    <h3 className="text-gray-400 text-sm">Liked Blogs</h3>
+                                    <p className="text-2xl sm:text-3xl font-bold mt-2">
+                                        {allLikedBlog.length || 0}
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            {/* YOUR MESSAGES */}
+                            <div className="py-6 lg:py-10">
+
+                                <h1 className="text-2xl sm:text-3xl font-bold mb-8">
+                                    Your Messages
+                                </h1>
+
+                                <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
+
+                                    {/* CONTACT MESSAGE */}
+                                    <div className="bg-[#0f172a] border border-gray-800 rounded-xl p-4 sm:p-6">
+
+                                        <div className="flex justify-between items-center mb-5">
+                                            <h2 className="text-lg sm:text-xl font-semibold">
+                                                Contact Messages
+                                            </h2>
+
+                                            <span className="bg-[#3b82f6]/10 text-[#60a5fa] px-3 py-1 rounded-md text-sm">
+                                                {currentContactMessage?.length || 0}
+                                            </span>
+                                        </div>
+
+                                        <div className="space-y-4">
+
+                                            {currentContactMessage?.length ? (
+                                                currentContactMessage.map((contact) => (
+                                                    <div
+                                                        key={contact._id}
+                                                        className="border border-gray-800 rounded-lg p-4 hover:border-[#3b82f6] transition-colors"
+                                                    >
+
+                                                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+
+                                                            <p className="text-xs text-gray-500">
+                                                                {new Date(contact.createdAt).toLocaleDateString(
+                                                                    "en-IN",
+                                                                    {
+                                                                        day: "numeric",
+                                                                        month: "short",
+                                                                        year: "numeric",
+                                                                    }
+                                                                )}
+                                                            </p>
+
+                                                            <button
+                                                                onClick={(e) =>
+                                                                    DeleteContactHandler(e, contact._id)
+                                                                }
+                                                                className="bg-blue-500/80 hover:bg-blue-500 rounded-full px-3 py-1 text-sm transition"
+                                                            >
+                                                                Delete
+                                                            </button>
+
+                                                        </div>
+
+                                                        <h3 className="text-lg font-medium mt-3">
+                                                            {contact.subject}
+                                                        </h3>
+
+                                                        <p className="text-gray-400 text-sm mt-2 break-words">
+                                                            {contact.message}
+                                                        </p>
+
+                                                    </div>
+                                                ))
+                                            ) : (
+                                                <p className="text-center text-gray-500 py-6">
+                                                    No Contact Messages
+                                                </p>
+                                            )}
+
+                                        </div>
+
+                                    </div>
+
+                                    {/* NORMAL MESSAGE */}
+                                    <div className="bg-[#0f172a] border border-gray-800 rounded-xl p-4 sm:p-6">
+
+                                        <div className="flex justify-between items-center mb-5">
+                                            <h2 className="text-lg sm:text-xl font-semibold">
+                                                Normal Messages
+                                            </h2>
+
+                                            <span className="bg-[#3b82f6]/10 text-[#60a5fa] px-3 py-1 rounded-md text-sm">
+                                                {currentNormalMessage?.length || 0}
+                                            </span>
+                                        </div>
+
+                                        <div className="space-y-4">
+
+                                            {currentNormalMessage?.length ? (
+                                                currentNormalMessage.map((normal) => (
+                                                    <div
+                                                        key={normal._id}
+                                                        className="border border-gray-800 rounded-lg p-4 hover:border-[#3b82f6] transition-colors"
+                                                    >
+
+                                                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+
+                                                            <p className="text-xs text-gray-500">
+                                                                {new Date(normal.createdAt).toLocaleDateString(
+                                                                    "en-IN",
+                                                                    {
+                                                                        day: "numeric",
+                                                                        month: "short",
+                                                                        year: "numeric",
+                                                                    }
+                                                                )}
+                                                            </p>
+
+                                                            <button
+                                                                onClick={(e) =>
+                                                                    DeleteMessageHandler(e, normal._id)
+                                                                }
+                                                                className="bg-blue-500/80 hover:bg-blue-500 rounded-full px-3 py-1 text-sm transition"
+                                                            >
+                                                                Delete
+                                                            </button>
+
+                                                        </div>
+
+                                                        <h3 className="text-lg font-medium mt-3">
+                                                            {normal.subject}
+                                                        </h3>
+
+                                                        <p className="text-gray-400 text-sm mt-2 break-words">
+                                                            {normal.message}
+                                                        </p>
+
+                                                    </div>
+                                                ))
+                                            ) : (
+                                                <p className="text-center text-gray-500 py-6">
+                                                    No Messages
+                                                </p>
+                                            )}
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            {/* BLOG COMMENTS */}
+                            <div className="mt-10">
+
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+
+                                    <h1 className="text-2xl sm:text-3xl font-bold">
+                                        Blog Comments
+                                    </h1>
+
+                                    <span className="bg-[#3b82f6]/10 text-[#60a5fa] px-3 py-1 rounded-md text-sm">
+                                        Comments: {allComments?.length || 0}
+                                    </span>
+
+                                </div>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+
+                                    {allComments?.length > 0 ? (
+                                        allComments.map((comment) => (
+                                            <div
+                                                key={comment._id}
+                                                className="border border-gray-800 rounded-lg p-4 hover:border-[#3b82f6] transition-colors"
+                                            >
+
+                                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+
+                                                    <p className="text-xs text-gray-500">
+                                                        {new Date(comment.createdAt).toLocaleDateString(
+                                                            "en-IN",
+                                                            {
+                                                                day: "numeric",
+                                                                month: "short",
+                                                                year: "numeric",
+                                                            }
+                                                        )}
+                                                    </p>
+
+                                                    <button
+                                                        onClick={(e) =>
+                                                            DeleteComment(e, comment._id)
                                                         }
-                                                    )}
+                                                        className="bg-blue-500/80 hover:bg-blue-500 rounded-full px-3 py-1 text-sm transition"
+                                                    >
+                                                        Delete
+                                                    </button>
+
+                                                </div>
+
+                                                <p className="text-white font-medium mt-3 break-words">
+                                                    {comment.content}
                                                 </p>
 
-                                                <button onClick={(e) => DeleteComment(e, comment._id)} className=" bg-blue-500/80 transition-all duration-200 hover:bg-blue-500/30 rounded-full hover:text-white p-1 text-sm px-3">Delete</button>
+                                                <p className="text-sm text-gray-400 mt-2">
+                                                    {checkBlogTitle(comment._id).title}
+                                                </p>
+
                                             </div>
+                                        ))
+                                    ) : (
+                                        <p className="text-center text-gray-500 col-span-full py-6">
+                                            No Blog Comments
+                                        </p>
+                                    )}
 
-                                            <p className="text-white font-medium text-md">
-                                                {comment.content}
-                                            </p>
-                                            <p className="text-sm text-gray-400/50  mt-1 mb-2">
-                                                {
-                                                    checkBlogTitle(comment._id).title
-                                                }
-                                            </p>
-
-
-                                        </div>
-                                    ))
-                                ) : (
-                                    <p className="text-gray-500 text-center py-6">
-                                        No Blog Comments
-                                    </p>
-                                )}
+                                </div>
 
                             </div>
 
-                        </div>
+                            {/* LIKED BLOG */}
+                            <div className="mt-10">
 
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
 
-                        {/* LIKED BLOG */}
-                        <div className="p-6 mt-10 max-w-6xl mx-auto">
+                                    <h1 className="text-2xl sm:text-3xl font-bold">
+                                        Liked Blog
+                                    </h1>
 
-                            <div className="flex justify-between items-center mb-5">
-                                <h1 className="text-3xl font-bold text-white mb-8">
-                                    Liked Blog
-                                </h1>
+                                    <span className="bg-[#3b82f6]/10 text-[#60a5fa] px-3 py-1 rounded-md text-sm">
+                                        Total: {allLikedBlog?.length || 0}
+                                    </span>
 
-                                <span className="bg-[#3b82f6]/10 text-[#60a5fa] px-3 py-1 rounded-md text-sm">
-                                    Total: {allLikedBlog?.length || 0}
-                                </span>
-                            </div>
+                                </div>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                                {blogLikedByUser?.length > 0 ? (
-                                    blogLikedByUser.map((blog) => (
-                                        <div key={blog._id} className="group flex flex-col justify-between border border-gray-800 bg-[#0b0f17] rounded-xl p-5 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300">
-                                            <div>
-                                                <h2 className="text-white font-semibold text-lg line-clamp-2 group-hover:text-blue-400 transition-colors">{blog.title}</h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
 
-                                                <p className="text-sm text-zinc-400 mt-2 line-clamp-3 leading-relaxed">{blog.excerpt}</p>
+                                    {blogLikedByUser?.length > 0 ? (
+                                        blogLikedByUser.map((blog) => (
+                                            <div
+                                                key={blog._id}
+                                                className="group flex flex-col justify-between border border-gray-800 bg-[#0b0f17] rounded-xl p-5 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300"
+                                            >
+
+                                                <div>
+
+                                                    <h2 className="text-lg font-semibold line-clamp-2 group-hover:text-blue-400 transition">
+                                                        {blog.title}
+                                                    </h2>
+
+                                                    <p className="text-sm text-zinc-400 mt-3 line-clamp-3">
+                                                        {blog.excerpt}
+                                                    </p>
+
+                                                </div>
+
+                                                <div className="flex justify-between items-center mt-5 text-sm text-zinc-400">
+
+                                                    <div className="flex items-center gap-1">
+                                                        <IoEyeOutline className="text-blue-400" />
+                                                        <span>{blog?.views || 0}</span>
+                                                    </div>
+
+                                                    <div className="flex items-center gap-1">
+                                                        <FcLike />
+                                                        <span>{blog?.likes?.length || 0}</span>
+                                                    </div>
+
+                                                    <div className="flex items-center gap-1">
+                                                        <GoComment className="text-green-400" />
+                                                        <span>{blog?.comments?.length || 0}</span>
+                                                    </div>
+
+                                                </div>
+
+                                                <Link
+                                                    to={`/blogs/read/${blog._id}`}
+                                                    className="mt-5 flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500 hover:text-white transition-all"
+                                                >
+                                                    Read More
+                                                    <GoArrowRight />
+                                                </Link>
+
                                             </div>
+                                        ))
+                                    ) : (
+                                        <p className="text-center text-gray-500 py-10 col-span-full">
+                                            No Liked Blog
+                                        </p>
+                                    )}
 
-                                            <div className="flex items-center justify-between mt-5 text-sm text-zinc-400">
-                                                <div className="flex items-center gap-1">
-                                                    <IoEyeOutline className="text-blue-400" />
-                                                    <span>{blog?.views || 0}</span>
-                                                </div>
-                                                <div className="flex items-center gap-1">
-                                                    <FcLike />
-                                                    <span>{blog?.likes?.length || 0}</span>
-                                                </div>
-                                                <div className="flex items-center gap-1">
-                                                    <GoComment className="text-green-400" />
-                                                    <span>{blog?.comments?.length || 0}</span>
-                                                </div>
-                                            </div>
+                                </div>
 
-                                            <Link to={`/blogs/read/${blog._id}`} className="mt-5 flex items-center justify-center gap-2 w-full py-2 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500 hover:text-white transition-all">Read More<GoArrowRight /></Link>
-                                        </div>
-                                    ))
-                                ) : (
-                                    <p className="text-gray-500 text-center py-10 col-span-full">
-                                        No Liked Blog
-                                    </p>
-                                )}
                             </div>
 
                         </div>
