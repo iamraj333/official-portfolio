@@ -49,160 +49,194 @@ export default function AdminDashboard() {
 
     return (
         <>
-        {
-            isLoading && <Loading/>
-        }
+            {
+                isLoading && <Loading />
+            }
             <Navbar />
 
             <div className="min-h-screen bg-[#0a0f1f] text-white">
-
                 {/* HERO */}
-                <section className="relative overflow-hidden pb-10">
+                <section className="relative overflow-hidden pb-8 sm:pb-10">
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/10 to-cyan-500/20 blur-3xl"></div>
 
-                    <div className="relative max-w-7xl mx-auto px-6 py-12">
-                        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8">
+                    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
+                        <div className="rounded-2xl lg:rounded-3xl border border-white/10 bg-white/5 p-5 sm:p-6 lg:p-8 backdrop-blur-md">
 
-                            <div className="flex flex-col lg:flex-row justify-between gap-8">
+                            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
 
-                                <div>
-                                    <span className="text-cyan-400 text-sm font-medium">
+                                <div className="flex-1">
+                                    <span className="text-sm font-medium text-cyan-400">
                                         ADMIN PANEL
                                     </span>
 
-                                    <h1 className="text-4xl md:text-5xl font-bold mt-3">
-                                        Welcome,
+                                    <h1 className="mt-3 text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+                                        Welcome,{" "}
                                         <span className="text-cyan-400">
                                             Admin
-                                            {/* {" "}
-                                            {currentUser?.currentUser?.name || "Admin"} */}
                                         </span>
                                     </h1>
 
-                                    <p className="text-gray-400 mt-4 max-w-2xl">
-                                        Monitor platform activity, manage users,
-                                        track sales, and oversee system operations
-                                        from one centralized dashboard.
+                                    <p className="mt-4 max-w-2xl text-sm text-gray-400 sm:text-base">
+                                        Monitor platform activity, manage users, track
+                                        sales, and oversee system operations from one
+                                        centralized dashboard.
                                     </p>
                                 </div>
 
-                                <div className="flex items-center">
-                                    {
-                                        isInternet ? (
-                                            <div className="bg-green-500/15 border border-green-500/30 px-4 py-2 rounded-full">
-                                                <span className="text-green-400 text-sm">
-                                                    ● System Operational
-                                                </span>
-                                            </div>
-                                        ) : (
-                                            <div className="bg-red-500/15 border border-red-500/30 px-4 py-2 rounded-full">
-                                                <span className="text-red-400 text-sm">
-                                                     ❗Network Connectivity Issue
-                                                </span>
-                                            </div>
-                                        )
-                                    }
+                                <div className="flex justify-start lg:justify-end">
+                                    {isInternet ? (
+                                        <div className="rounded-full border border-green-500/30 bg-green-500/15 px-4 py-2">
+                                            <span className="whitespace-nowrap text-sm text-green-400">
+                                                ● System Operational
+                                            </span>
+                                        </div>
+                                    ) : (
+                                        <div className="rounded-full border border-red-500/30 bg-red-500/15 px-4 py-2">
+                                            <span className="whitespace-nowrap text-sm text-red-400">
+                                                ❗ Network Connectivity Issue
+                                            </span>
+                                        </div>
+                                    )}
                                 </div>
 
                             </div>
-
                         </div>
                     </div>
                 </section>
 
                 {/* ANALYTICS */}
-                <section className="relative -top-10 max-w-7xl mx-auto px-6 pb-10">
+                <section className="relative -mt-4 sm:-mt-6 lg:-mt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 lg:pb-10">
 
-                    <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
 
-                        <div className="bg-[#101827] border border-blue-500/20 rounded-2xl p-6 hover:border-blue-500/50 transition">
-                            <div className="text-blue-400 text-sm">
+                        {/* USERS */}
+                        <div className="rounded-2xl border border-blue-500/20 bg-[#101827] p-5 sm:p-6 transition hover:border-blue-500/50">
+                            <div className="text-sm text-blue-400">
                                 Total Users
                             </div>
-                            <h2 className="text-4xl font-bold mt-3">{allUsers.length}</h2>
-                            <p className="text-green-400 text-sm mt-2">
+
+                            <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
+                                {allUsers.length}
+                            </h2>
+
+                            <p className="mt-2 text-sm text-green-400">
                                 +12% this month
                             </p>
                         </div>
 
-                        <div className="bg-[#101827] border border-purple-500/20 rounded-2xl p-6 hover:border-purple-500/50 transition">
-                            <div className="text-purple-400 text-sm">
+                        {/* BLOGS */}
+                        <div className="rounded-2xl border border-purple-500/20 bg-[#101827] p-5 sm:p-6 transition hover:border-purple-500/50">
+                            <div className="text-sm text-purple-400">
                                 Total Blogs
                             </div>
-                            <h2 className="text-4xl font-bold mt-3">{blogContent.length || 0}</h2>
-                            <p className="text-green-400 text-sm mt-2">
-                                Published blog
+
+                            <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
+                                {blogContent.length || 0}
+                            </h2>
+
+                            <p className="mt-2 text-sm text-green-400">
+                                Published blogs
                             </p>
                         </div>
 
-                        <div className="bg-[#101827] border border-orange-500/20 rounded-2xl p-6 hover:border-orange-500/50 transition">
-                            <div className="text-orange-400 text-sm">
+                        {/* MESSAGES */}
+                        <div className="rounded-2xl border border-orange-500/20 bg-[#101827] p-5 sm:p-6 transition hover:border-orange-500/50">
+                            <div className="text-sm text-orange-400">
                                 Total Messages
                             </div>
-                            <h2 className="text-4xl font-bold mt-3">{(allMessages.length + (allNormalMessages.length))}</h2>
-                            <p className="text-yellow-400 text-sm mt-2">
+
+                            <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
+                                {allMessages.length + allNormalMessages.length}
+                            </h2>
+
+                            <p className="mt-2 text-sm text-yellow-400">
                                 Needs Attention
                             </p>
                         </div>
 
-                        <div className="bg-[#101827] border border-cyan-500/20 rounded-2xl p-6 hover:border-cyan-500/50 transition">
-                            <div className="text-cyan-400 text-sm">
+                        {/* REVENUE */}
+                        <div className="rounded-2xl border border-cyan-500/20 bg-[#101827] p-5 sm:p-6 transition hover:border-cyan-500/50">
+                            <div className="text-sm text-cyan-400">
                                 Revenue
                             </div>
-                            <h2 className="text-3xl font-bold mt-3">
-                                Not Disclosed(₹)
+
+                            <h2 className="mt-3 break-words text-2xl font-bold sm:text-3xl">
+                                Not Disclosed (₹)
                             </h2>
-                            <p className="text-green-400 text-sm mt-2">
+
+                            <p className="mt-2 text-sm text-green-400">
                                 0% growth
                             </p>
                         </div>
 
                     </div>
-
                 </section>
 
                 {/* MAIN CONTENT */}
-                <section className="max-w-7xl mx-auto px-6 pb-12">
-                    <div className="grid lg:grid-cols-3 lg:grid-cols gap-8">
-                        {/* QUICK ACTIONS */}
-                        <div className="w-full h-fit bg-[#101827] border border-gray-800  rounded-3xl p-4 lg:sticky lg:top-[80px]">
+                <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 lg:pb-12">
 
-                            <h2 className="text-2xl font-semibold mb-6">
+                    <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
+
+                        {/* QUICK ACTIONS */}
+                        <div className="h-fit w-full rounded-2xl lg:rounded-3xl border border-gray-800 bg-[#101827] p-5 sm:p-6 lg:sticky lg:top-20">
+
+                            <h2 className="mb-6 text-xl font-semibold sm:text-2xl">
                                 Quick Actions
                             </h2>
 
                             <div className="space-y-4">
 
-                                <button className="w-full bg-blue-600 hover:bg-blue-700 rounded-xl text-left transition">
-                                    <HashLink className="p-4 block" smooth to={"/admin/users"}>Manage Users</HashLink>
+                                <button className="w-full rounded-xl bg-blue-600 text-left transition hover:scale-[1.02] hover:bg-blue-700 active:scale-95">
+                                    <HashLink
+                                        smooth
+                                        to="/admin/users"
+                                        className="block px-4 py-3 sm:py-4"
+                                    >
+                                        Manage Users
+                                    </HashLink>
                                 </button>
 
-                                <button className="w-full bg-purple-600 hover:bg-purple-700 rounded-xl text-left transition">
-                                    <HashLink className="p-4 block" smooth to={"/admin/messages"}>User Messages</HashLink>
+                                <button className="w-full rounded-xl bg-purple-600 text-left transition hover:scale-[1.02] hover:bg-purple-700 active:scale-95">
+                                    <HashLink
+                                        smooth
+                                        to="/admin/messages"
+                                        className="block px-4 py-3 sm:py-4"
+                                    >
+                                        User Messages
+                                    </HashLink>
                                 </button>
 
-                                <button className="w-full bg-cyan-600 hover:bg-cyan-700 rounded-xl text-left transition">
-                                    <HashLink className="p-4 block" smooth to={"/admin/blogs"}>Blogs</HashLink>
+                                <button className="w-full rounded-xl bg-cyan-600 text-left transition hover:scale-[1.02] hover:bg-cyan-700 active:scale-95">
+                                    <HashLink
+                                        smooth
+                                        to="/admin/blogs"
+                                        className="block px-4 py-3 sm:py-4"
+                                    >
+                                        Blogs
+                                    </HashLink>
                                 </button>
 
-                                <button className="w-full bg-orange-600 hover:bg-orange-700 rounded-xl  text-left transition">
-                                    <HashLink className="p-4 block" smooth to={"/"}>Home</HashLink>
+                                <button className="w-full rounded-xl bg-orange-600 text-left transition hover:scale-[1.02] hover:bg-orange-700 active:scale-95">
+                                    <HashLink
+                                        smooth
+                                        to="/"
+                                        className="block px-4 py-3 sm:py-4"
+                                    >
+                                        Home
+                                    </HashLink>
                                 </button>
+
                             </div>
-
-
                         </div>
 
-                        <div className="w-full lg:col-span-2">
+                        {/* OUTLET */}
+                        <div className="min-w-0 w-full lg:col-span-2">
                             <Outlet />
                         </div>
 
                     </div>
 
                 </section>
-
-
-
             </div>
 
             <Footer />
