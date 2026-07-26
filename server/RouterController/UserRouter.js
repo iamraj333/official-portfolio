@@ -42,6 +42,7 @@ Router.post("/register", async (req, res) => {
         }
     }
     catch (e) {
+        console.error("REGISTER ERROR:", e);
         return res.status(200).json({ internetError: "Internet connection failed" })
     }
 
