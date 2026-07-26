@@ -221,7 +221,7 @@ export default function Blogs() {
                                                                     <article key={blog._id} className="group flex flex-col overflow-hidden rounded-2xl border border-gray-800 bg-[#111827 transition-all duration-30 hover:-translate-y- hover:border-blue-500/5 hover:shadow-xl hover:shadow-blue-500/10">
                                                                         {/* Thumbnail */}
                                                                         <div className="relative h-52 sm:h-56 overflow-hidden">
-                                                                            <img src={blog.thumbnail} alt={blog.title} className="h-full w-full object-covertransition-transform duration-500group-hover:scale-110"/>
+                                                                            <img src={blog.thumbnail} alt={blog.title} className="h-full w-full object-covertransition-transform duration-500group-hover:scale-110" />
 
                                                                             {/* Gradient Overlay */}
                                                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -302,61 +302,75 @@ export default function Blogs() {
                                                     <>
                                                         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
                                                             {[...filterCategoryBlog].reverse().slice(0, lastItem).map((blog) => (
-                                                                <article
-                                                                    key={blog._id}
-                                                                    className=" group overflow-hidden rounded-2xl border border-gray-800 bg-[#111827] shadow-sm hover:border-gray-700"
-                                                                >
+                                                                <article key={blog._id} className="group flex flex-col overflow-hidden rounded-2xl border border-gray-800 bg-[#111827 transition-all duration-30 hover:-translate-y- hover:border-blue-500/5 hover:shadow-xl hover:shadow-blue-500/10">
                                                                     {/* Thumbnail */}
-                                                                    <div className="relative overflow-hidden">
-                                                                        <div className="w-full z-10 bg-black/100">
-                                                                            <img
-                                                                                src={blog.thumbnail}
-                                                                                alt={blog.title}
-                                                                                className="h-56 w-full object-cover transition-all duration-[0.4s] group-hover:scale-[120%]"
-                                                                            />
-                                                                        </div>
+                                                                    <div className="relative h-52 sm:h-56 overflow-hidden">
+                                                                        <img src={blog.thumbnail} alt={blog.title} className="h-full w-full object-covertransition-transform duration-500group-hover:scale-110" />
 
-                                                                        {/* Category Overlay */}
-                                                                        <span className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/50 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
+                                                                        {/* Gradient Overlay */}
+                                                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+                                                                        {/* Category */}
+                                                                        <span className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/40 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
                                                                             {blog.category}
                                                                         </span>
                                                                     </div>
 
-                                                                    {/* Content */}
-                                                                    <div className="flex flex-col px-6 py-4">
 
-                                                                        {/* Date */}
-                                                                        <div className="mb-2 flex items-center justify-between text-sm">
-                                                                            <p className="text-gray-500">
+                                                                    {/* Content */}
+                                                                    <div className="flex flex-1 flex-col p-5">
+
+                                                                        {/* Meta */}
+                                                                        <div className="mb-4 flex items-center justify-between text-xs text-gray-400">
+                                                                            <span>
                                                                                 {new Date(blog.createdAt).toLocaleDateString("en-US", {
                                                                                     day: "2-digit",
                                                                                     month: "short",
                                                                                     year: "numeric",
                                                                                 })}
-                                                                            </p>
+                                                                            </span>
 
-                                                                            <p className="text-gray-400">
-                                                                                By <span className="text-gray-300 font-medium">Author</span>
-                                                                            </p>
+                                                                            <span>By <span className="text-gray-300">Author</span></span>
                                                                         </div>
 
+
                                                                         {/* Title */}
-                                                                        <h2 className="mb-3 text-xl font-semibold leading-snug text-white">
+                                                                        <h2 className=" line-clamp-2 text-lg sm:text-xl font-semibold leading-snug text-white transition-colors group-hover:text-blue-400 ">
                                                                             {blog.title}
                                                                         </h2>
 
-
                                                                         {/* Excerpt */}
-                                                                        <p className="mb-6 line-clamp-3 leading-relaxed text-gray-400">
+                                                                        <p className=" mt-3 line-clamp-3 text-sm leading-relaxed text-gray-400 ">
                                                                             {blog.excerpt}
                                                                         </p>
 
+
+                                                                        {/* Stats */}
+                                                                        <div className=" mt-5 flex items-center gap-5 border-t border-gray-800 pt-4 text-sm text-gray-400">
+                                                                            <div className="flex items-center gap-1">
+                                                                                <IoEyeOutline className="text-blue-400" />
+                                                                                <span>{blog?.views || 0}</span>
+                                                                            </div>
+
+                                                                            <div className="flex items-center gap-1">
+                                                                                <FcLike />
+                                                                                <span>{blog?.likes?.length || 0}</span>
+                                                                            </div>
+
+                                                                            <div className="flex items-center gap-1">
+                                                                                <GoComment className="text-green-400" />
+                                                                                <span>{blog?.comments?.length || 0}</span>
+                                                                            </div>
+                                                                        </div>
+
+
                                                                         {/* Footer */}
-                                                                        <div className="mt-auto flex items-center justify-between border-t border-gray-800 pt-5">
-                                                                            <Link to={`/blogs/read/${blog._id}`} className="text-sm font-medium text-[#3b82f6] hover:text-white">
+                                                                        <div className="mt-5">
+                                                                            <Link to={`/blogs/read/${blog._id}`} className=" flex items-center justify-center rounded-lg bg-blue-500/10 py-2.5 text-sm font-medium text-blue-400 transition-all hover:bg-blue-500 hover:text-white">
                                                                                 Read More →
                                                                             </Link>
                                                                         </div>
+
                                                                     </div>
                                                                 </article>
                                                             ))}

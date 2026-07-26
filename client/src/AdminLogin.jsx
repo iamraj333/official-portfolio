@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Swal from "sweetalert2";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, Navigate, useNavigate } from "react-router-dom";
 import Loading from "./Loading";
 import { useContext } from "react";
 import { ContextAPIData } from "./ContextData/ContentAPIData";
 import { useEffect } from "react";
 
 export default function AdminLogin() {
-    const {storeAdminTokenInLocalStorage}=useContext(ContextAPIData)
+    const { storeAdminTokenInLocalStorage, currentUser, adminToken } = useContext(ContextAPIData)
     const [isLoading, setIsLoading] = useState(false);
     const [adminData, setAdminData] = useState({
         email: "",
@@ -39,11 +39,11 @@ export default function AdminLogin() {
         });
     };
 
-    const {state}=useLocation()
-    useEffect(()=>{
-        if(state){
-        showToast("warning", state.warning)
-    }
+    const { state } = useLocation()
+    useEffect(() => {
+        if (state) {
+            showToast("warning", state.warning)
+        }
     }, [state])
 
     const handleLogin = async (e) => {
@@ -75,15 +75,20 @@ export default function AdminLogin() {
             console.error("Login Server failed")
             showToast("Login Server Failed")
         }
-        finally{
-                setIsLoading(false)
+        finally {
+            setIsLoading(false)
         }
     };
+
+    if (currentUser || adminToken) {
+        showToast("warning", "User already logged in")
+        return <Navigate to={'/'} />
+    }
 
     return (
         <>
             {
-                isLoading && <Loading/>
+                isLoading && <Loading />
             }
 
             <div className="min-h-screen bg-[#0b0f17] text-white font-sans flex flex-col">

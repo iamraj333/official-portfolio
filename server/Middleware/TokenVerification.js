@@ -18,7 +18,7 @@ const TokenVerification=async(req,res,next)=>{
     catch(e){
         req.user=null;
         console.error("You're token expired")
-        res.json({userTokenExpireError: "You're token expired"})
+        res.status(200).json({userTokenExpireError: "You're token expired"})
     }
     
     

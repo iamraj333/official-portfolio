@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
+import { useContext } from "react";
+import { ContextAPIData } from "./ContextData/ContentAPIData";
 
 export default function Register() {
+    const {currentUser, adminToken}=useContext(ContextAPIData)
     const [registerData, setRegisterData] = useState({
         name: "",
         email: "",
@@ -69,6 +72,11 @@ export default function Register() {
             showToast("error","Failed to send data to the server")
         }
 
+    }
+
+    if(currentUser || adminToken){
+        showToast("warning","You're already logged in")
+        return <Navigate to={'/'}/>
     }
 
     return (

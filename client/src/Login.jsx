@@ -4,11 +4,11 @@ import Footer from "./Footer";
 import Swal from "sweetalert2";
 import { useContext } from "react";
 import { ContextAPIData } from "./ContextData/ContentAPIData";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, Navigate, useNavigate } from "react-router-dom";
 import Loading from "./Loading";
 
 export default function Login() {
-
+    const { currentUser, adminToken } = useContext(ContextAPIData)
     const [loginData, setLoginData] = useState({
         email: "",
         password: "",
@@ -85,6 +85,11 @@ export default function Login() {
         finally {
             setIsLoading(false)
         }
+    }
+
+    if (currentUser || adminToken) {
+        showToast("warning", "You're already logged in")
+        return <Navigate to={'/'} />
     }
 
     return (

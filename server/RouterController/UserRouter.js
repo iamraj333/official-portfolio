@@ -219,23 +219,23 @@ Router.delete('/dashboard/comment/delete/:id', TokenVerification, async (req, re
         if (!CommentData) {
             res.json({ error: "Comment is not exists" })
         }
-        let commentOnBlog=null;
-        Blog.map(blog=>{
-            blog.comments.map((comment)=>{
-                if(comment._id==commentId){
-                    commentOnBlog=blog
+        let commentOnBlog = null;
+        Blog.map(blog => {
+            blog.comments.map((comment) => {
+                if (comment._id == commentId) {
+                    commentOnBlog = blog
                 }
             })
         })
 
 
-        commentOnBlog.comments.pull({_id:commentId})
-        const savedBlog =await commentOnBlog.save()
-        if(savedBlog){
-        }else{
-            res.json({error:"Failed to delete comment"})
+        commentOnBlog.comments.pull({ _id: commentId })
+        const savedBlog = await commentOnBlog.save()
+        if (savedBlog) {
+        } else {
+            res.json({ error: "Failed to delete comment" })
         }
-            res.json({success:"Comment deleted successfully"})
+        res.json({ success: "Comment deleted successfully" })
     }
     catch (e) {
         res.status(200).json({ internetError: "Internet connection failed" })
@@ -255,14 +255,16 @@ Router.post("/admin/login", async (req, res) => {
         if (AdminData.email != adminEmail || AdminData.password != adminPassword) {
             res.json({ error: "Invalid credentials" })
         }
-        const token = await jwt.sign(AdminData, process.env.ADMIN_TOKEN_SECRET_KEY, {
-            expiresIn: `${process.env.ADMIN_TOKEN_EXPIRE}`
-        })
+        else {
+            const token = await jwt.sign(AdminData, process.env.ADMIN_TOKEN_SECRET_KEY, {
+                expiresIn: `${process.env.ADMIN_TOKEN_EXPIRE}`
+            })
 
-        res.json({
-            success: "Welcome Admin",
-            adminToken: token
-        })
+            res.json({
+                success: "Welcome Admin",
+                adminToken: token
+            })
+        }
 
     }
     catch (e) {
@@ -432,6 +434,7 @@ Router.post("/blogs/write_blog", AdminTokenVerification, async (req, res) => {
     }
     catch (e) {
         res.status(200).json({ internetError: "Internet connection failed" })
+        console.log(e)
     }
 })
 
@@ -451,7 +454,7 @@ Router.get("/blogs/read/:id", async (req, res) => {
     const id = req.params.id
     try {
         const blogDataSpecificId = await BlogSchema.findOne({ _id: id }).populate("comments.user")
-        blogDataSpecificId.views+=1;
+        blogDataSpecificId.views += 1;
         await blogDataSpecificId.save()
         res.json(blogDataSpecificId)
     }
@@ -542,43 +545,43 @@ Router.post('/blogs/read/:id/comment', TokenVerification, async (req, res) => {
 })
 
 // Blog Like
-Router.post('/blogs/like/:id', TokenVerification, async(req,res)=>{
-    const blogId=req.params.id;
-    const user=req.user;
-    try{
-        const Blog=await BlogSchema.findOne({_id:blogId}).populate("likes")
-        const isLikesExists=Blog.likes.map((like)=>like.email==user.email)
-        if(isLikesExists){
+Router.post('/blogs/like/:id', TokenVerification, async (req, res) => {
+    const blogId = req.params.id;
+    const user = req.user;
+    try {
+        const Blog = await BlogSchema.findOne({ _id: blogId }).populate("likes")
+        const isLikesExists = Blog.likes.map((like) => like.email == user.email)
+        if (isLikesExists) {
             Blog.likes.pull(user.userId)
             // Blog.dislikes.pull(user.userId)
         }
         Blog.likes.push(user.userId)
         Blog.dislikes.pull(user.userId)
         await Blog.save()
-        res.json({success:"Like is done"})
+        res.json({ success: "Like is done" })
     }
-    catch(e){
+    catch (e) {
         res.status(200).json({ internetError: "Internet connection failed" })
     }
 })
 
 // Blog DisLike
-Router.post('/blogs/dislike/:id', TokenVerification, async(req,res)=>{
-    const blogId=req.params.id;
-    const user=req.user;
-    try{
-        const Blog=await BlogSchema.findOne({_id:blogId}).populate("dislikes")
-        const isDislikesExists=Blog.dislikes.map((like)=>like.email==user.email)
-        if(isDislikesExists){
+Router.post('/blogs/dislike/:id', TokenVerification, async (req, res) => {
+    const blogId = req.params.id;
+    const user = req.user;
+    try {
+        const Blog = await BlogSchema.findOne({ _id: blogId }).populate("dislikes")
+        const isDislikesExists = Blog.dislikes.map((like) => like.email == user.email)
+        if (isDislikesExists) {
             Blog.dislikes.pull(user.userId)
             // Blog.likes.pull(user.userId)
         }
         Blog.dislikes.push(user.userId)
         Blog.likes.pull(user.userId)
         await Blog.save()
-        res.json({success:"Dislike is done"})
+        res.json({ success: "Dislike is done" })
     }
-    catch(e){
+    catch (e) {
         res.status(200).json({ internetError: "Internet connection failed" })
     }
 })
