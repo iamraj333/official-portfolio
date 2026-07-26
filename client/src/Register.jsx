@@ -7,7 +7,8 @@ import { useContext } from "react";
 import { ContextAPIData } from "./ContextData/ContentAPIData";
 
 export default function Register() {
-    const {currentUser, adminToken}=useContext(ContextAPIData)
+    const { currentUser, adminToken } = useContext(ContextAPIData)
+    const [isLoading, setIsLoading] = useState(false)
     const [registerData, setRegisterData] = useState({
         name: "",
         email: "",
@@ -37,9 +38,10 @@ export default function Register() {
         });
     };
 
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
     const RegisterSubmitHandler = async (e) => {
+        setIsLoading(true)
         e.preventDefault()
         try {
             const response = await fetch(`${import.meta.env.VITE_CLIENT_URL}/register`, {
@@ -52,31 +54,36 @@ export default function Register() {
 
 
             const data = await response.json()
-            if (data.success) {
-                showToast('success', `${data.success}`)
-                setRegisterData({
-                    name: "",
-                    email: "",
-                    password: "",
-                    confirmPassword: ""
-                })
+            if (data.internetError) {
+                if (data.success) {
+                    showToast('success', `${data.success}`)
+                    setRegisterData({
+                        name: "",
+                        email: "",
+                        password: "",
+                        confirmPassword: ""
+                    })
 
-                navigate("/login")
-            }
-            else {
-                showToast('error', `${data.error}`)
+                    navigate("/login")
+                }
+                else {
+                    showToast('error', `${data.error}`)
+                }
             }
         }
         catch (e) {
             console.error("Failed to send Data to the server")
-            showToast("error","Failed to send data to the server")
+            showToast("error", "Failed to send data to the server")
+        }
+        finally {
+            setIsLoading(false)
         }
 
     }
 
-    if(currentUser || adminToken){
-        showToast("warning","You're already logged in")
-        return <Navigate to={'/'}/>
+    if (currentUser || adminToken) {
+        showToast("warning", "You're already logged in")
+        return <Navigate to={'/'} />
     }
 
     return (
