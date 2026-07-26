@@ -6,8 +6,7 @@ import Contact from './Contact';
 import Footer from './Footer';
 import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
-import myPhoto from "./assets/myPhoto.png"
-
+import profile from './assets/profile.jpg'
 
 export default function Home() {
     return (
@@ -73,7 +72,7 @@ export default function Home() {
 
                             {/* IMAGE */}
                             <img
-                                src={myPhoto}
+                                src={import.meta.env.VITE_PROFILE_URL||profile}
                                 alt="Profile"
                                 className="w-full h-full object-cover scale-110 hover:scale-105 transition-transform duration-500"
                             />
