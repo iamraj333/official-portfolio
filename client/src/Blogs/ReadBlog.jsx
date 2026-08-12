@@ -180,6 +180,7 @@ export default function ReadBlog() {
         setIsLoading(true)
         if (!userToken) {
             showToast("error", "loggin is required to comment")
+            setIsLoading(false)
             return;
         }
         else {
