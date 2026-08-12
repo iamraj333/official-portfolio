@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function ContactUs() {
     //context currentUser Data
+    const {userToken}=useContext(ContextAPIData)
     const currentUser = useContext(ContextAPIData)
     const navigate=useNavigate();
 
@@ -58,7 +59,11 @@ export default function ContactUs() {
     const ContactFormSubmitHandler = async (e) => {
         setIsLoading(true)
         e.preventDefault()
-
+        if(!userToken){
+            showToast("error", "please loggin to send me contact message")
+            setIsLoading(false)
+            return;
+        }
         if(contactData.message.split("").length<20 || contactData.subject.split("").length<5){
             showToast("error","message or subject is too short")
             setIsLoading(false)
