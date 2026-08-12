@@ -75,45 +75,50 @@ export default function ReadBlog() {
         setIsDislike(false)
         setIsLike(!isLike)
 
-        try {
-            const response = await fetch(`${import.meta.env.VITE_CLIENT_URL}/blogs/like/${blogId}`, {
-                method: 'POST',
-                headers: {
-                    token: userToken
-                }
-            })
+        if (!userToken) {
+            showToast("error", "loggin is required to action")
+            return;
+        } else {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_CLIENT_URL}/blogs/like/${blogId}`, {
+                    method: 'POST',
+                    headers: {
+                        token: userToken
+                    }
+                })
 
-            const data = await response.json();
+                const data = await response.json();
 
-            if (data.internetError) {
-                showToast("error", data.internetError)
-                setIsLike(false)
-                setIsDislike(false)
-            }
-            else {
-                if (data.userTokenExpireError) {
-                    localStorage.removeItem('MyToken')
+                if (data.internetError) {
+                    showToast("error", data.internetError)
                     setIsLike(false)
                     setIsDislike(false)
                 }
                 else {
-                    if (data.success) {
-                        setIsLike(true)
-                        FetchBlogContentFunction()
-                        setIsDislike(false)
-                    }
-                    else {
-                        showToast("error", data.error)
+                    if (data.userTokenExpireError) {
+                        localStorage.removeItem('MyToken')
                         setIsLike(false)
                         setIsDislike(false)
                     }
+                    else {
+                        if (data.success) {
+                            setIsLike(true)
+                            FetchBlogContentFunction()
+                            setIsDislike(false)
+                        }
+                        else {
+                            showToast("error", data.error)
+                            setIsLike(false)
+                            setIsDislike(false)
+                        }
+                    }
                 }
             }
-        }
-        catch (e) {
-            console.error("Failed to connect server")
-            setIsLike(false)
-            setIsDislike(false)
+            catch (e) {
+                console.error("Failed to connect server")
+                setIsLike(false)
+                setIsDislike(false)
+            }
         }
     }
 
@@ -121,45 +126,50 @@ export default function ReadBlog() {
         setIsLike(false)
         setIsDislike(!isDislike)
 
-        try {
-            const response = await fetch(`${import.meta.env.VITE_CLIENT_URL}/blogs/dislike/${blogId}`, {
-                method: 'POST',
-                headers: {
-                    token: userToken
-                }
-            })
+        if (!userToken) {
+            showToast("error", "loggin is required to action")
+            return;
+        } else {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_CLIENT_URL}/blogs/dislike/${blogId}`, {
+                    method: 'POST',
+                    headers: {
+                        token: userToken
+                    }
+                })
 
-            const data = await response.json();
+                const data = await response.json();
 
-            if (data.internetError) {
-                showToast("error", data.internetError)
-                setIsLike(false)
-                setIsDislike(false)
-            }
-            else {
-                if (data.userTokenExpireError) {
-                    localStorage.removeItem('MyToken')
+                if (data.internetError) {
+                    showToast("error", data.internetError)
                     setIsLike(false)
                     setIsDislike(false)
                 }
                 else {
-                    if (data.success) {
-                        setIsDislike(true)
-                        FetchBlogContentFunction()
-                        setIsLike(false)
-                    }
-                    else {
-                        showToast("error", data.error)
+                    if (data.userTokenExpireError) {
+                        localStorage.removeItem('MyToken')
                         setIsLike(false)
                         setIsDislike(false)
                     }
+                    else {
+                        if (data.success) {
+                            setIsDislike(true)
+                            FetchBlogContentFunction()
+                            setIsLike(false)
+                        }
+                        else {
+                            showToast("error", data.error)
+                            setIsLike(false)
+                            setIsDislike(false)
+                        }
+                    }
                 }
             }
-        }
-        catch (e) {
-            console.error("Failed to connect server")
-            setIsLike(false)
-            setIsDislike(false)
+            catch (e) {
+                console.error("Failed to connect server")
+                setIsLike(false)
+                setIsDislike(false)
+            }
         }
     }
 
@@ -168,54 +178,60 @@ export default function ReadBlog() {
     const submitComment = async (e, blogId) => {
         e.preventDefault()
         setIsLoading(true)
-        if (!userComment) {
-            showToast("error", "comment text required")
-            setIsLoading(false)
+        if (!userToken) {
+            showToast("error", "loggin is required to comment")
             return;
         }
-        if (userComment.split("").length < 3) {
-            showToast("error", "Comment is too short")
-            setIsLoading(false)
-            return;
-        }
-        try {
-            const response = await fetch(`${import.meta.env.VITE_CLIENT_URL}/blogs/read/${blogId}/comment`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    token: userToken
-                },
-                body: JSON.stringify({ content: userComment })
-            })
-
-            const data = await response.json();
-
-            if (data.internetError) {
-                // setIsInternet(false)
-                showToast("error", data.internetError)
+        else {
+            if (!userComment) {
+                showToast("error", "comment text required")
+                setIsLoading(false)
+                return;
             }
-            else {
-                if (data.userTokenExpireError) {
-                    localStorage.removeItem('MyToken')
-                    showToast("error", data.userTokenExpireError)
+            if (userComment.split("").length < 3) {
+                showToast("error", "Comment is too short")
+                setIsLoading(false)
+                return;
+            }
+            try {
+                const response = await fetch(`${import.meta.env.VITE_CLIENT_URL}/blogs/read/${blogId}/comment`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        token: userToken
+                    },
+                    body: JSON.stringify({ content: userComment })
+                })
+
+                const data = await response.json();
+
+                if (data.internetError) {
+                    // setIsInternet(false)
+                    showToast("error", data.internetError)
                 }
                 else {
-                    if (data.success) {
-                        showToast("success", data.success)
-                        FetchBlogContentFunction()
-                        setUserComment("");
+                    if (data.userTokenExpireError) {
+                        localStorage.removeItem('MyToken')
+                        showToast("error", data.userTokenExpireError)
                     }
                     else {
-                        showToast("error", data.error)
+                        if (data.success) {
+                            showToast("success", data.success)
+                            FetchBlogContentFunction()
+                            setUserComment("");
+                        }
+                        else {
+                            showToast("error", data.error)
+                        }
                     }
                 }
             }
-        }
-        catch (e) {
-            console.error("Failed to connect server")
-        }
-        finally {
-            setIsLoading(false)
+            catch (e) {
+                console.error("Failed to connect server")
+            }
+            finally {
+                setIsLoading(false)
+            }
         }
     }
 
