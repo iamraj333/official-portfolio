@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import Swal from "sweetalert2";
 
 export default function Logout() {
-    const { currentUser, isUserHasToken, adminToken } = useContext(ContextAPIData)
+    const { currentUser, isUserHasToken, adminToken, userToken} = useContext(ContextAPIData)
     const showToast = (icon, title) => {
         Swal.fire({
             toast: true,
@@ -17,7 +17,9 @@ export default function Logout() {
             timerProgressBar: true
         });
     };
-
+    if(!userToken && !adminToken){
+        return <Navigate to={"/login"}></Navigate>
+    }
     if (isUserHasToken) {
         const { logoutUser } = useContext(ContextAPIData)
         useEffect(() => {
