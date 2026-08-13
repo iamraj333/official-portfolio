@@ -108,7 +108,7 @@ export default function Login() {
                     </h1>
 
                     <p className="text-[#9ca3af] text-sm leading-relaxed">
-                        Login to continue building and managing your developer projects with Dev.Craft.
+                        Login to continue building and managing your developer projects with Raj.Craft.
                     </p>
 
                 </div>
@@ -122,7 +122,7 @@ export default function Login() {
                         <div className="absolute w-72 h-72 bg-[#3b82f6]/20 blur-3xl rounded-full top-10 left-10"></div>
 
                         <h1 className="text-4xl text-zinc-100 font-bold mb-4 relative">
-                            Welcome to <span className="text-[#3b82f6]">Dev.Craft</span>
+                            Welcome to <span className="text-[#3b82f6]">Raj.Craft</span>
                         </h1>
 
                         <p className="text-[#9ca3af] mb-8 leading-relaxed relative">

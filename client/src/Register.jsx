@@ -107,7 +107,7 @@ export default function Register() {
                     </h1>
 
                     <p className="text-[#9ca3af] text-sm leading-relaxed">
-                        Join Dev.Craft and start building modern developer projects with a clean workflow, secure authentication, and powerful tools.
+                        Join Raj.Craft and start building modern developer projects with a clean workflow, secure authentication, and powerful tools.
                     </p>
 
                 </div>
@@ -121,7 +121,7 @@ export default function Register() {
                         <div className="absolute w-72 h-72 bg-[#3b82f6]/20 blur-3xl rounded-full top-10 left-10"></div>
 
                         <h1 className="text-4xl text-zinc-100 font-bold mb-4 relative">
-                            Build with <span className="text-[#3b82f6]">Dev.Craft</span>
+                            Build with <span className="text-[#3b82f6]">Raj.Craft</span>
                         </h1>
 
                         <p className="text-[#9ca3af] mb-8 leading-relaxed relative">
