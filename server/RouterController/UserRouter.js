@@ -134,7 +134,7 @@ Router.post('/auth/email', async (req, res) => {
         }
         const isEmailValid = (await validate(email.trim().toLowerCase())).valid;
         if (isEmailValid == false) {
-            return res.json({ error: "Email is invalid" })
+            return res.json({ error: "Email is invalid", details:await validate(email.trim().toLowerCase())})
         }
 
         //Making email cleared
