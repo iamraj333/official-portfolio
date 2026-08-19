@@ -144,7 +144,8 @@ export default function Skills() {
                 <div className="flex flex-wrap gap-2">
 
                   {group.items.map((item, i) => (
-                    <span
+                    <a
+                      href={`https://www.google.com/search?q=${item}`}
                       key={i}
                       className="
                         px-3
@@ -164,7 +165,7 @@ export default function Skills() {
                       "
                     >
                       {item}
-                    </span>
+                    </a>
                   ))}
 
                 </div>
