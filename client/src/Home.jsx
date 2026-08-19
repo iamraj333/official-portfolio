@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import About from './About';
 import Skills from './Skills';
 import Projects from './Project';
@@ -7,8 +7,26 @@ import Footer from './Footer';
 import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
 import profile from './assets/profile.jpg'
+import Swal from 'sweetalert2';
+import { ContextAPIData } from './ContextData/ContentAPIData';
 
 export default function Home() {
+    const { userToken, adminToken } = useContext(ContextAPIData)
+    const showToast = (icon, title) => {
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: icon,
+            title: title,
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+        });
+    };
+    const myResumeBtn = (e) => {
+        e.preventDefault();
+        showToast("warning", "Login to view my resume.")
+    }
     return (
         <div className="antialiased flex flex-col justify-between bg-[#0b0f17] text-white font-sans scroll-smooth">
             <Navbar />
@@ -40,11 +58,17 @@ export default function Home() {
 
                         <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
 
-                            <a href="/myresume.pdf"
-                                target="_blank"
-                                rel="noopener noreferrer" className="px-6 py-3 rounded-lg bg-[#3b82f6] text-white font-medium hover:bg-[#2563eb] transition-colors text-sm shadow-lg shadow-[#3b82f6]/20">
-                                My Resume
-                            </a>
+                            {
+                                (!adminToken || !userToken) ? (
+                                    <button onClick={myResumeBtn} className="px-6 py-3 rounded-lg bg-[#3b82f6] text-white font-medium hover:bg-[#2563eb] transition-colors text-sm shadow-lg shadow-[#3b82f6]/20">My Resume</button>
+                                ) : (
+                                    <a href="/myresume.pdf"
+                                        target="_blank"
+                                        rel="noopener noreferrer" className="px-6 py-3 rounded-lg bg-[#3b82f6] text-white font-medium hover:bg-[#2563eb] transition-colors text-sm shadow-lg shadow-[#3b82f6]/20">
+                                        My Resume
+                                    </a>
+                                )
+                            }
 
                             <Link
                                 to={"/contactUs"}
