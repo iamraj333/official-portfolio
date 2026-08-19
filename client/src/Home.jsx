@@ -40,11 +40,10 @@ export default function Home() {
 
                         <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
 
-                            <a
-                                href="#projects"
-                                className="px-6 py-3 rounded-lg bg-[#3b82f6] text-white font-medium hover:bg-[#2563eb] transition-colors text-sm shadow-lg shadow-[#3b82f6]/20"
-                            >
-                                View Projects
+                            <a href="/myresume.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer" className="px-6 py-3 rounded-lg bg-[#3b82f6] text-white font-medium hover:bg-[#2563eb] transition-colors text-sm shadow-lg shadow-[#3b82f6]/20">
+                                My Resume
                             </a>
 
                             <Link
