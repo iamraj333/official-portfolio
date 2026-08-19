@@ -64,9 +64,6 @@ export default function Register() {
                 showToast("success", data.success)
                 setOtpSent(true)
             }
-            else if(data.details){
-                console.log(data.details)
-            }
             else {
                 showToast("error", data.error)
             }
