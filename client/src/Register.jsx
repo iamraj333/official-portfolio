@@ -392,7 +392,7 @@ export default function Register() {
                             <button
                                 type="submit"
                                 disabled={!isEmailVerified}
-                                className="w-full py-3  rounded-lg bg-[#3b82f6] hover:bg-[#2563eb] transition font-medium text-white"
+                                className="w-full py-3 disabled:cursor-not-allowed disabled:opacity-50 rounded-lg bg-[#3b82f6] hover:bg-[#2563eb] transition font-medium text-white"
                             >
                                 Create Account
                             </button>
