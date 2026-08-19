@@ -49,6 +49,15 @@ The application supports two roles:
 - Persistent Login
 - Logout Functionality
 
+## Email Verification
+
+- **Resend API** — Sends OTP verification emails.
+- **OTP** — Generates a temporary verification code.
+- **Redis Cloud** — Stores OTP with an expiration time.
+- **ioredis** — Connects the application with Redis.
+- **Verification** — Validates the OTP and verifies the user's email.
+- **Auto Expiry** — OTP expires after the configured time.
+
 
 
 ## Blog System
@@ -167,12 +176,16 @@ Users have access to:
 - localStorage
 - dotenv
 - CORS
+- Resend
+- IoRedis
+- deep-email-validator
 
 
 
 ## Database
 
 - MongoDB Atlas
+- Redis Cloud
 
 
 
@@ -318,6 +331,12 @@ CLOUD_NAME=your_cloud_name
 CLOUD_API_KEY=your_api_key
 CLOUD_SECRET_KEY=your_api_secret
 
+# Resend API
+RESEND_API_KEY=your_resend_api_key
+FROM_SENDER=email_sender_domain_email_name
+
+#Redis Cloud
+REDIS_CLOUD_URL=your_redis_cloud_url
 ```
 
 Create a `.env` file inside the **client** folder.
@@ -365,6 +384,7 @@ http://localhost:3000
 # API Modules
 
 - Authentication
+- OTP Send and Verification
 - Users
 - Blogs
 - Comments
@@ -381,6 +401,7 @@ http://localhost:3000
 - Blogs
 - Messages
 - ContactMessages
+- OTP in Redis Cloud
 
 ---
 
@@ -397,7 +418,6 @@ The website is fully responsive and optimized for:
 
 # Future Improvements
 
-- Email Verification
 - Forgot Password
 - Reset Password
 - Blog Search
@@ -407,8 +427,6 @@ The website is fully responsive and optimized for:
 - Dark Mode
 - Bookmark Blogs
 - Admin Analytics Dashboard
-- Role-Based Access Control (RBAC)
-- Two-Factor Authentication (2FA)
 
 
 
