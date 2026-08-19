@@ -132,9 +132,10 @@ Router.post('/auth/email', async (req, res) => {
         if (email == "") {
             return res.json({ error: "email is required" })
         }
-        const isEmailValid = (await validate(email.trim().toLowerCase())).valid;
-        if (isEmailValid == false) {
-            return res.json({ error: "Email is invalid", details:await validate(email.trim().toLowerCase())})
+        const validateResult = (await validate(email.trim().toLowerCase()));
+        const {regex, typo, disposable, mx, smtp}=validateResult.validators;
+        if (!regex.valid || !typo.valid || !disposable.valid || !mx.valid) {
+            return res.json({ error: "Email is invalid"})
         }
 
         //Making email cleared
