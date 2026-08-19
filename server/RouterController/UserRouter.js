@@ -10,6 +10,10 @@ const AdminTokenVerification = require('../Middleware/AdminTokenVerification');
 const cloudinary = require('../config/cloudinary')
 const BlogSchema = require('../MongoDB/BlogSchema')
 require('dotenv').config()
+const { Resend } = require('resend')
+const crypto = require('node:crypto')
+const Redis = require('ioredis')
+const { validate } = require('deep-email-validator');
 
 //creating router
 const Router = express.Router()
@@ -100,7 +104,249 @@ Router.get('/userdata', TokenVerification, async (req, res) => {
 })
 
 
+/* ============================= EMAIL OTP SEND & STORE IN REDIS CLOUD DB ==============================================*/
+//Email Resend
+const resend = new Resend(process.env.RESEND_API_KEY);
+const OTP_EXPIRY = 180; //180/60 = 3 minute
+const ATTEMPT_LIMIT = 5;
+const OTP_RESEND_COOLDOWN = 30; //30 second ke baad firse email send kar sakte hai nahi toh usse pahle nahi kar sakte hai
 
+//Redis Connection
+const redis = new Redis(process.env.REDIS_CLOUD_URL);
+//checking redis connection
+redis.on("connect", () => {
+    console.log("Redis connected successfully");
+})
+redis.on("error", (error) => console.log("Failed to connect Redis: ", error))
+
+//Function to make plain OTP into Hashed Format
+function plainToHashed(otp) {
+    return crypto.createHash('sha256').update(otp).digest('hex');
+}
+
+
+//otp via email and redis
+Router.post('/auth/email', async (req, res) => {
+    try {
+        const { email } = req.body;
+        if (email == "") {
+            return res.json({ error: "email is required" })
+        }
+        const isEmailValid = (await validate(email.trim().toLowerCase())).valid;
+        if (isEmailValid == false) {
+            return res.json({ error: "Email is invalid" })
+        }
+
+        //Making email cleared
+        const clearedEmail = email.trim().toLowerCase();
+        const isEmailAlreadyExists = await WebUser.findOne({ email: clearedEmail })
+
+        if (isEmailAlreadyExists) {
+            return res.json({ error: "Email is already verified, so Please login." })
+        }
+
+        const isVerificationCooldownRunning = await redis.get(`otp:cooldown:${clearedEmail}`)
+
+        if (isVerificationCooldownRunning) {
+            const timeRemainForCooldown = await redis.ttl(`otp:cooldown:${clearedEmail}`)
+            return res.json({ error: `Please wait ${timeRemainForCooldown} seconds before requesting another OTP` })
+        }
+        else {
+            //sending email
+            const otp = crypto.randomInt(100000, 1000000).toString()
+            const hashedOTP = await plainToHashed(otp)
+
+            //set hashed otp with expiry in redis
+            await redis.set(`otp:${clearedEmail}`, hashedOTP, "EX", OTP_EXPIRY); //store otp in redis for 3 minute
+            await redis.del(`otp:attempts:${clearedEmail}`) // reset the attempt as attempt limit is 5
+
+            //sending email
+
+            const { data, error } = await resend.emails.send({
+                from: process.env.FROM_SENDER,
+                to: [clearedEmail],
+                subject: "Your Email Verification OTP",
+                html: `
+                <div style="
+                    margin: 0;
+                    padding: 48px 20px;
+                    background-color: #f7f7f8;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+                ">
+                    <div style="
+                    max-width: 480px;
+                    margin: 0 auto;
+                    background-color: #ffffff;
+                    border: 1px solid #e8e8eb;
+                    border-radius: 14px;
+                    overflow: hidden;
+                    ">
+    
+                    <!-- Header -->
+                    <div style="
+                        padding: 32px 36px 24px;
+                        border-bottom: 1px solid #f0f0f2;
+                    ">
+                        <div style="
+                        width: 36px;
+                        height: 36px;
+                        line-height: 36px;
+                        background-color: #111111;
+                        color: #ffffff;
+                        border-radius: 9px;
+                        text-align: center;
+                        font-size: 16px;
+                        font-weight: 700;
+                        margin-bottom: 28px;
+                        ">RC</div>
+    
+                        <h1 style="
+                        margin: 0;
+                        color: #111111;
+                        font-size: 22px;
+                        line-height: 1.3;
+                        font-weight: 600;
+                        letter-spacing: -0.4px;
+                        ">
+                        Verify your email
+                        </h1>
+                    </div>
+    
+                    <!-- Content -->
+                    <div style="
+                        padding: 32px 36px 36px;
+                    ">
+    
+                        <p style="
+                        margin: 0;
+                        color: #55555c;
+                        font-size: 15px;
+                        line-height: 1.7;
+                        ">
+                        Enter the verification code below to continue.
+                        This code is valid for 3 minutes.
+                        </p>
+    
+                        <!-- OTP -->
+                        <div style="
+                        margin: 28px 0;
+                        padding: 22px 20px;
+                        background-color: #fafafa;
+                        border: 1px solid #e6e6e8;
+                        border-radius: 10px;
+                        text-align: center;
+                        ">
+                        <span style="
+                            color: #111111;
+                            font-size: 30px;
+                            line-height: 1;
+                            font-weight: 600;
+                            letter-spacing: 9px;
+                            padding-left: 9px;
+                        ">
+                            ${otp}
+                        </span>
+                        </div>
+    
+                        <p style="
+                        margin: 0;
+                        color: #8a8a91;
+                        font-size: 13px;
+                        line-height: 1.6;
+                        ">
+                        If you didn't request this code, you can safely ignore
+                        this email.
+                        </p>
+    
+                    </div>
+    
+                    <!-- Footer -->
+                    <div style="
+                        padding: 20px 36px;
+                        background-color: #fafafa;
+                        border-top: 1px solid #f0f0f2;
+                    ">
+                        <p style="
+                        margin: 0;
+                        color: #a0a0a6;
+                        font-size: 11px;
+                        line-height: 1.5;
+                        ">
+                        This is an automated message. Please do not reply.
+                        </p>
+                    </div>
+    
+                    </div>
+                </div>
+                `,
+
+            });
+
+            if (error) {
+                await redis.del(`otp:${clearedEmail}`)
+                await redis.del(`otp:cooldown:${clearedEmail}`)
+                return res.json({ error: "Failed to send OTP to your email" });
+            }
+            else {
+                //set cooldown to tell user that email is still cooling down so please wait 30 sec for another OTP request
+                await redis.set(`otp:cooldown:${clearedEmail}`, "yes", 'EX', OTP_RESEND_COOLDOWN);
+                console.log("Cooldown Email: ", await redis.ttl(`otp:cooldown:${clearedEmail}`))
+                return res.json({ success: "OTP sent successfully to your email, Please verify it" })
+            }
+
+
+        }
+    }
+    catch (e) {
+        console.error("Backend Failed in OTP verification")
+    }
+})
+
+
+//Email Verification
+Router.post('/auth/email/verify', async (req, res) => {
+    try {
+        const { userOtp, email } = req.body;
+        if (!userOtp) {
+            return res.json({ error: "OTP is required" })
+        }
+        else {
+            const RedisStoredOtp = await redis.get(`otp:${email.trim().toLowerCase()}`)
+
+            if (!RedisStoredOtp) {
+                return res.json({ error: "OTP expired or not found" })
+            }
+
+            //check current attempts
+            const currentAttempts = Number(await redis.get(`otp:attempts:${email.trim().toLowerCase()}`)) || 0;
+            if (currentAttempts >= ATTEMPT_LIMIT) {
+                await redis.del(`otp:${email.trim().toLowerCase()}`)
+                await redis.del(`otp:attempts:${email.trim().toLowerCase()}`)
+                return res.json({ error: "Too many incorrect attempts. Please request a new OTP." })
+            }
+            else {
+                const hashedUserOtp = plainToHashed(userOtp);
+
+                if (hashedUserOtp != RedisStoredOtp) {
+                    const attempts = Number(await redis.get(`otp:attempts:${email.trim().toLowerCase()}`)) || 0
+                    if (attempts >= ATTEMPT_LIMIT) {
+                        return res.json({ error: "Too many incorrect attempts. Please request a new OTP." })
+                    }
+                    await redis.incr(`otp:attempts:${email.trim().toLowerCase()}`)
+                    return res.json({ error: "Invalid OTP" })
+                }
+                else {
+                    await redis.del(`otp:${email.trim().toLowerCase()}`)
+                    await redis.del(`otp:attempts:${email.trim().toLowerCase()}`)
+                    return res.json({ success: "Email Verified Successfully" })
+                }
+            }
+        }
+    }
+    catch (e) {
+        console.error("Failed in email verification at backend, ", e)
+    }
+})
 
 
 /* =============================== CONTACT AND MESSAGE ROUTES ===========================================*/
