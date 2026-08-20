@@ -9,6 +9,11 @@ export default function Projects() {
       github: "https://github.com/iamraj333/Cleanza-Cleaning-Service-Provider-Platform-Django-"
     },
     {
+      title: "AI Math Solver",
+      desc: "Developed a full-stack AI-powered mathematics problem solver using React, Tailwind CSS, Node.js, Express.js, and the Google Gemini API to provide step-by-step solutions to mathematical questions.",
+      github: "https://github.com/iamraj333/math-ai"
+    },
+    {
       title: "Crane Service Website",
       desc: "Developed a responsive frontend website for a crane service company using HTML, CSS, and JavaScript, featuring service information, equipment showcase, contact forms, and an intuitive user interface.",
       github: "https://github.com/your-username/crane-service-website"
