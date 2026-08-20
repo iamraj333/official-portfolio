@@ -9,7 +9,7 @@ export default function Projects() {
       github: "https://github.com/iamraj333/Cleanza-Cleaning-Service-Provider-Platform-Django-"
     },
     {
-      title: "AI Math Solver",
+      title: "AI Math Solver (Gemini API)",
       desc: "Developed a full-stack AI-powered mathematics problem solver using React, Tailwind CSS, Node.js, Express.js, and the Google Gemini API to provide step-by-step solutions to mathematical questions.",
       github: "https://github.com/iamraj333/math-ai"
     },
