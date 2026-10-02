@@ -108,7 +108,7 @@ export default function Login() {
                     </h1>
 
                     <p className="text-[#9ca3af] text-sm leading-relaxed">
-                        Login to continue building and managing your developer projects with Raj.Craft.
+                        Your account helps you become part of the Raj.Craft community.
                     </p>
 
                 </div>
@@ -126,24 +126,24 @@ export default function Login() {
                         </h1>
 
                         <p className="text-[#9ca3af] mb-8 leading-relaxed relative">
-                            Continue your journey of building modern web applications with clean architecture and scalable systems.
+                            Sign in to connect with me and get more from my portfolio.
                         </p>
 
                         <div className="space-y-4 text-sm text-[#9ca3af] relative">
 
                             <div className="flex gap-3 items-center">
                                 <span className="w-2 h-2 rounded-full bg-[#3b82f6]"></span>
-                                Access your saved projects anytime
+                                Contact me directly and start a conversation
                             </div>
 
                             <div className="flex gap-3 items-center">
                                 <span className="w-2 h-2 rounded-full bg-[#3b82f6]"></span>
-                                Secure and fast authentication
+                                Like, comment on, and engage with my blogs
                             </div>
 
                             <div className="flex gap-3 items-center">
                                 <span className="w-2 h-2 rounded-full bg-[#3b82f6]"></span>
-                                Manage your developer workspace
+                                Access features available to registered members
                             </div>
 
                         </div>
