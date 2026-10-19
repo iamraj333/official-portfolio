@@ -87,13 +87,8 @@ export default function AdminLogin() {
 
     return (
         <>
-            {
-                isLoading && <Loading />
-            }
-
             <div className="min-h-screen bg-[#0b0f17] text-white font-sans flex flex-col">
                 <Navbar />
-
                 <main className="flex-grow flex items-center justify-center px-4 relative">
 
                     {/* BACKGROUND GLOW */}
@@ -104,16 +99,16 @@ export default function AdminLogin() {
                     <div className="w-full max-w-md bg-[#111827]/80 border border-gray-800 rounded-2xl p-8 shadow-2xl backdrop-blur-md">
 
                         {/* TITLE */}
-                        <h1 className="text-3xl font-bold text-center mb-2">
+                        <h1 data-aos="fade-up" className="text-3xl font-bold text-center mb-2">
                             Admin Login
                         </h1>
 
-                        <p className="text-gray-400 text-center mb-8 text-sm">
+                        <p data-aos="fade-up" className="text-gray-400 text-center mb-8 text-sm">
                             Only authorized admins can access dashboard
                         </p>
 
                         {/* FORM */}
-                        <form onSubmit={handleLogin} className="space-y-5">
+                        <form data-aos="fade-up" onSubmit={handleLogin} className="space-y-5">
 
                             {/* EMAIL */}
                             <div>
@@ -143,10 +138,11 @@ export default function AdminLogin() {
 
                             {/* BUTTON */}
                             <button
+                            disabled={isLoading}
                                 type="submit"
-                                className="w-full py-3 rounded-lg bg-[#3b82f6] hover:bg-[#2563eb] transition-colors font-medium shadow-lg shadow-[#3b82f6]/20"
+                                className="w-full py-3 rounded-lg bg-[#3b82f6] hover:bg-[#2563eb] transition-colors font-medium shadow-lg shadow-[#3b82f6]/20 disabled:cursor-not-allowed disabled:opacity-50"
                             >
-                                Login
+                                {isLoading?"Login...":"Login"}
                             </button>
                         </form>
 

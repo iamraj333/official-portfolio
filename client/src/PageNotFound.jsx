@@ -19,7 +19,7 @@ export default function PageNotFound() {
                 <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center text-center">
 
                     {/* 404 Number */}
-                    <div className="relative mb-6">
+                    <div data-aos="fade-up" className="relative mb-6">
                         <h1 className="text-[120px] md:text-[220px] font-black leading-none text-transparent bg-clip-text bg-gradient-to-r from-[#3b82f6] via-blue-400 to-cyan-300">
                             404
                         </h1>
@@ -28,19 +28,19 @@ export default function PageNotFound() {
                     </div>
 
                     {/* Heading */}
-                    <h2 className="text-3xl md:text-5xl font-bold mb-4">
+                    <h2 data-aos="fade-up" className="text-3xl md:text-5xl font-bold mb-4">
                         Page Not Found
                     </h2>
 
                     {/* Description */}
-                    <p className="text-gray-400 max-w-2xl text-base md:text-lg leading-relaxed mb-12">
+                    <p data-aos="fade-up" className="text-gray-400 max-w-2xl text-base md:text-lg leading-relaxed mb-12">
                         The page you're looking for doesn't exist, may have been
                         moved, or the URL might be incorrect. Let's get you back
                         to something useful.
                     </p>
 
                     {/* Floating Card Design */}
-                    <div className="relative w-72 h-44 md:w-96 md:h-56 mb-12">
+                    <div data-aos="fade-up" className="relative w-72 h-44 md:w-96 md:h-56 mb-12">
 
                         {/* Back Card */}
                         <div className="absolute inset-0 bg-[#1f2937]/40 border border-gray-800 rounded-2xl rotate-[-8deg] translate-x-5 translate-y-5"></div>
@@ -74,9 +74,10 @@ export default function PageNotFound() {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-4">
+                    <div data-aos="fade-up" className="flex flex-col sm:flex-row gap-4">
 
                         <Link
+                        data-aos="zoom-in"
                             to="/"
                             className="px-8 py-3 rounded-lg bg-[#3b82f6] text-white font-medium hover:bg-[#2563eb] transition-colors shadow-lg shadow-[#3b82f6]/20"
                         >
@@ -84,6 +85,7 @@ export default function PageNotFound() {
                         </Link>
 
                         <Link
+                        data-aos="zoom-in"
                             to="/contactUs"
                             className="px-8 py-3 rounded-lg border border-gray-700 text-gray-400 font-medium hover:border-[#3b82f6] hover:text-white transition-colors"
                         >

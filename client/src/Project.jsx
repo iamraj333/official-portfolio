@@ -28,10 +28,10 @@ export default function Projects() {
   return (
     <section id="projects" className="border-t border-gray-800 bg-[#0f172a]/40 py-20">
       <div className="max-w-5xl mx-auto px-4">
-        <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-12">Featured Projects</h2>
+        <h2 data-aos="fade-up" className="text-2xl md:text-3xl font-bold tracking-tight mb-12">Featured Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {customProjects.map((project, index) => (
-            <div key={index} className='relative'>
+            <div data-aos="fade-up" data-aos-delay={100*index} key={index} className='relative'>
               <div  className=" relative w-full h-full z-[10] bg-[#111827] border border-gray-800 rounded-xl p-6 flex flex-col justify-between transition-all duration-300 md:hover:border-2 md:hover:-translate-y-2 md:hover:-translate-x-2">
                 <div>
                   <h3 className="text-lg font-bold text-white mb-2">{project.title}</h3>

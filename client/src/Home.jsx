@@ -38,7 +38,7 @@ export default function Home() {
                     <div className="absolute w-72 h-72 bg-[#3b82f6]/10 blur-3xl rounded-full bottom-0 right-10 -z-10"></div>
 
                     {/* LEFT INFO */}
-                    <div className="w-full md:w-3/5 text-center md:text-left">
+                    <div data-aos="fade-right" className="w-full md:w-3/5 text-center md:text-left">
 
                         <p className="text-sm font-semibold tracking-wider text-[#3b82f6] uppercase mb-2">
                             Hello, I am
@@ -81,8 +81,7 @@ export default function Home() {
                     </div>
 
                     {/* RIGHT IMAGE */}
-                    {/* RIGHT IMAGE (ANIMATED UNSTRUCTURED STYLE) */}
-                    <div className="w-full md:w-2/5 flex justify-center relative">
+                    <div data-aos="fade-left" className="w-full md:w-2/5 flex justify-center relative">
 
                         {/* BACKGROUND GLOW */}
                         <div className="absolute w-72 h-72 bg-[#3b82f6]/10 blur-3xl rounded-full -z-10 animate-pulse"></div>

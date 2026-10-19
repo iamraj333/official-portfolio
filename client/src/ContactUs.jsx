@@ -103,15 +103,11 @@ export default function ContactUs() {
     return (
         <>
             <Navbar />
-            
-            {
-                isLoading && <Loading/>
-            }
 
             <div className="min-h-screen flex flex-col items-center justify-center bg-[#0b0f17] px-4 py-12 pt-6">
 
                 {/* OUTSIDE HEADING */}
-                <div className="text-center max-w-2xl mb-6">
+                <div data-aos="fade-up" className="text-center max-w-2xl mb-6">
 
                     <h1 className="text-4xl font-bold text-white mb-3">
                         Get In Touch
@@ -124,7 +120,7 @@ export default function ContactUs() {
                 </div>
 
                 {/* MAIN CARD */}
-                <div className="w-full max-w-5xl grid md:grid-cols-2 overflow-hidden rounded-2xl border border-gray-800 shadow-2xl">
+                <div data-aos="fade-up" className="w-full max-w-5xl grid md:grid-cols-2 overflow-hidden rounded-2xl border border-gray-800 shadow-2xl">
 
                     {/* LEFT SIDE */}
                     <div className="hidden md:flex flex-col justify-center p-12 py-4 bg-gradient-to-br from-[#0f172a] to-[#0b0f17] relative">
@@ -207,10 +203,11 @@ export default function ContactUs() {
                             ></textarea>
 
                             <button
+                            disabled={isLoading}
                                 type="submit"
-                                className="w-full py-3 rounded-lg bg-[#3b82f6] hover:bg-[#2563eb] transition font-medium text-white"
+                                className="w-full py-3 rounded-lg bg-[#3b82f6] hover:bg-[#2563eb] transition font-medium text-white disabled:cursor-not-allowed disabled:opacity-50"
                             >
-                                Send Message
+                                {isLoading?"Sending...":"Send Message"}
                             </button>
 
                         </form>

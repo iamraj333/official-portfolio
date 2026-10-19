@@ -56,7 +56,7 @@ export default function AdminDashboard() {
 
             <div className="min-h-screen bg-[#0a0f1f] text-white">
                 {/* HERO */}
-                <section className="relative overflow-hidden pb-8 sm:pb-10">
+                <section data-aos="fade-up" className="relative overflow-hidden pb-8 sm:pb-10">
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/10 to-cyan-500/20 blur-3xl"></div>
 
                     <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
@@ -110,7 +110,7 @@ export default function AdminDashboard() {
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
 
                         {/* USERS */}
-                        <div className="rounded-2xl border border-blue-500/20 bg-[#101827] p-5 sm:p-6 transition hover:border-blue-500/50">
+                        <div data-aos="fade-up" data-aos-delay={100} className="rounded-2xl border border-blue-500/20 bg-[#101827] p-5 sm:p-6 transition hover:border-blue-500/50">
                             <div className="text-sm text-blue-400">
                                 Total Users
                             </div>
@@ -125,7 +125,7 @@ export default function AdminDashboard() {
                         </div>
 
                         {/* BLOGS */}
-                        <div className="rounded-2xl border border-purple-500/20 bg-[#101827] p-5 sm:p-6 transition hover:border-purple-500/50">
+                        <div data-aos="fade-up" data-aos-delay={200} className="rounded-2xl border border-purple-500/20 bg-[#101827] p-5 sm:p-6 transition hover:border-purple-500/50">
                             <div className="text-sm text-purple-400">
                                 Total Blogs
                             </div>
@@ -140,7 +140,7 @@ export default function AdminDashboard() {
                         </div>
 
                         {/* MESSAGES */}
-                        <div className="rounded-2xl border border-orange-500/20 bg-[#101827] p-5 sm:p-6 transition hover:border-orange-500/50">
+                        <div data-aos="fade-up" data-aos-delay={300} className="rounded-2xl border border-orange-500/20 bg-[#101827] p-5 sm:p-6 transition hover:border-orange-500/50">
                             <div className="text-sm text-orange-400">
                                 Total Messages
                             </div>
@@ -155,7 +155,7 @@ export default function AdminDashboard() {
                         </div>
 
                         {/* REVENUE */}
-                        <div className="rounded-2xl border border-cyan-500/20 bg-[#101827] p-5 sm:p-6 transition hover:border-cyan-500/50">
+                        <div data-aos="fade-up" data-aos-delay={400} className="rounded-2xl border border-cyan-500/20 bg-[#101827] p-5 sm:p-6 transition hover:border-cyan-500/50">
                             <div className="text-sm text-cyan-400">
                                 Revenue
                             </div>
@@ -178,7 +178,7 @@ export default function AdminDashboard() {
                     <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
 
                         {/* QUICK ACTIONS */}
-                        <div className="h-fit w-full rounded-2xl lg:rounded-3xl border border-gray-800 bg-[#101827] p-5 sm:p-6 lg:sticky lg:top-20">
+                        <div data-aos="fade-right" className="h-fit w-full rounded-2xl lg:rounded-3xl border border-gray-800 bg-[#101827] p-5 sm:p-6 lg:sticky lg:top-20">
 
                             <h2 className="mb-6 text-xl font-semibold sm:text-2xl">
                                 Quick Actions
@@ -230,7 +230,7 @@ export default function AdminDashboard() {
                         </div>
 
                         {/* OUTLET */}
-                        <div className="min-w-0 w-full lg:col-span-2">
+                        <div data-left="fade-up" className="min-w-0 w-full lg:col-span-2">
                             <Outlet />
                         </div>
 

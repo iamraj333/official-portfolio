@@ -19,8 +19,22 @@ import WriteBlog from './Blogs/WriteBlog'
 import ReadBlog from './Blogs/ReadBlog'
 import AdminBlogs from './AdminBlogs'
 import NoBlogFound from './Blogs/NoBlogFound'
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react"
 
 function App() {
+  // =========================== AOS ANIMATION ===========================================
+  useEffect(() => {
+    if (AOS) {
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100,
+        easing: "ease-out-cubic",
+      })
+    }
+  }, [])
   return (
     <>
       <BrowserRouter>
@@ -31,18 +45,18 @@ function App() {
           <Route path='/contactUs' element={<ContactUs />}></Route>
           <Route path='/dashboard' element={<Dashboard />}></Route>
           <Route path='/logout' element={<Logout />}></Route>
-          <Route path='/blogs' element={<Blogs/>}></Route>
-          <Route path='/blogs/write_blog' element={<WriteBlog/>}></Route>
-          <Route path='/blogs/read/:id' element={<ReadBlog/>}></Route>
-          <Route path='/admin/blogs/edit/:id' element={<WriteBlog/>}></Route>
-          <Route path='/blogs/filter/tags/:tag' element={<NoBlogFound/>}></Route>
-          <Route path="/admin/login" element={<AdminLogin/>}></Route>
+          <Route path='/blogs' element={<Blogs />}></Route>
+          <Route path='/blogs/write_blog' element={<WriteBlog />}></Route>
+          <Route path='/blogs/read/:id' element={<ReadBlog />}></Route>
+          <Route path='/admin/blogs/edit/:id' element={<WriteBlog />}></Route>
+          <Route path='/blogs/filter/tags/:tag' element={<NoBlogFound />}></Route>
+          <Route path="/admin/login" element={<AdminLogin />}></Route>
           <Route path="/admin" element={<AdminDashboard />}>
             <Route index element={<AdminUser />}></Route>
             <Route path='users' element={<AdminUser />}></Route>
             <Route path='blogs' element={<AdminBlogs />}></Route>
             <Route path='messages' element={<AdminContactMessage />}>
-            <Route index element={<ContactMessages/>}></Route>
+              <Route index element={<ContactMessages />}></Route>
               <Route path='contact' element={<ContactMessages />}></Route>
               <Route path='normal' element={<NormalMessages />}></Route>
             </Route>

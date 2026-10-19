@@ -95,13 +95,10 @@ export default function Login() {
     return (
         <>
             <Navbar />
-            {
-                isLoading && <Loading />
-            }
             <div className="min-h-screen flex flex-col items-center justify-center bg-[#0b0f17] px-4 py-12">
 
                 {/* OUTSIDE HEADING SECTION */}
-                <div className="text-center max-w-2xl mb-10">
+                <div data-aos="fade-up" className="text-center max-w-2xl mb-10">
 
                     <h1 className="text-4xl font-bold text-white mb-3">
                         Welcome Back
@@ -114,7 +111,7 @@ export default function Login() {
                 </div>
 
                 {/* MAIN CARD */}
-                <div className="w-full max-w-5xl grid md:grid-cols-2 overflow-hidden rounded-2xl border border-gray-800 shadow-2xl">
+                <div data-aos="fade-up" className="w-full max-w-5xl grid md:grid-cols-2 overflow-hidden rounded-2xl border border-gray-800 shadow-2xl">
 
                     {/* LEFT SIDE */}
                     <div className="hidden md:flex flex-col justify-center p-12 bg-gradient-to-br from-[#0f172a] to-[#0b0f17] relative">
@@ -194,10 +191,11 @@ export default function Login() {
                             </div>
 
                             <button
+                            disabled={isLoading}
                                 type="submit"
-                                className="w-full py-3 rounded-lg bg-[#3b82f6] hover:bg-[#2563eb] transition font-medium text-white"
+                                className="w-full py-3 rounded-lg bg-[#3b82f6] hover:bg-[#2563eb] transition font-medium text-white disabled:cursor-not-allowed disabled:opacity-50"
                             >
-                                Login
+                                {isLoading?"Login...":"Login"}
                             </button>
 
                             <p className="text-xs text-center text-[#9ca3af]">

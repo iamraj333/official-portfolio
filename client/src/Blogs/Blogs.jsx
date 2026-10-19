@@ -109,7 +109,7 @@ export default function Blogs() {
                             <div className="absolute w-72 h-72 bg-[#3b82f6]/10 blur-3xl rounded-full top-10 left-0 -z-10"></div>
                             <div className="absolute w-72 h-72 bg-[#3b82f6]/10 blur-3xl rounded-full bottom-0 right-0 -z-10"></div>
 
-                            <div className="text-center mb-16">
+                            <div data-aos="fade-up" className="text-center mb-16">
                                 {
                                     adminToken ? (
                                         <p className="uppercase tracking-widest text-[#3b82f6] text-sm font-semibold mb-3">
@@ -134,7 +134,7 @@ export default function Blogs() {
                             </div>
 
                             {/* BLOG CARDS */}
-                            <div className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                            <div data-aos="fade-up" className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
 
                                 {/* Left Side - Title */}
                                 <div>
@@ -217,8 +217,8 @@ export default function Blogs() {
                                                             {[...filterCategoryBlog]
                                                                 .reverse()
                                                                 .slice(firstItem, lastItem)
-                                                                .map((blog) => (
-                                                                    <article key={blog._id} className="group flex flex-col overflow-hidden rounded-2xl border border-gray-800 bg-[#111827 transition-all duration-30 hover:-translate-y- hover:border-blue-500/5 hover:shadow-xl hover:shadow-blue-500/10">
+                                                                .map((blog,index) => (
+                                                                    <article data-aos="fade-up" data-aos-delay={100*index} key={blog._id} className="group flex flex-col overflow-hidden rounded-2xl border border-gray-800 bg-[#111827 transition-all duration-30 hover:-translate-y- hover:border-blue-500/5 hover:shadow-xl hover:shadow-blue-500/10">
                                                                         {/* Thumbnail */}
                                                                         <div className="relative h-52 sm:h-56 overflow-hidden">
                                                                             <img src={blog.thumbnail} alt={blog.title} className="h-full w-full object-covertransition-transform duration-500group-hover:scale-110" />
@@ -292,7 +292,7 @@ export default function Blogs() {
                                                                 ))}
                                                         </div>
 
-                                                        <div className="flex justify-center mx-auto mt-10 w-full gap-6 items-center">
+                                                        <div data-aos="fade-up" className="flex justify-center mx-auto mt-10 w-full gap-6 items-center">
                                                             <button onClick={goPrevPage} className="text-3xl block text-zinc-300 transition-all duration-300 hover:text-zinc-100"><FaRegCaretSquareLeft /></button>
                                                             <p className="text-zinc-400 font-light text-sm">{currentPage} of {totalPage}</p>
                                                             <button onClick={goNextPage} className="text-3xl block text-zinc-300 transition-all duration-300 hover:text-zinc-100"><FaRegCaretSquareRight /></button>
@@ -301,8 +301,8 @@ export default function Blogs() {
                                                 ) : (
                                                     <>
                                                         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-                                                            {[...filterCategoryBlog].reverse().slice(0, lastItem).map((blog) => (
-                                                                <article key={blog._id} className="group flex flex-col overflow-hidden rounded-2xl border border-gray-800 bg-[#111827 transition-all duration-30 hover:-translate-y- hover:border-blue-500/5 hover:shadow-xl hover:shadow-blue-500/10">
+                                                            {[...filterCategoryBlog].reverse().slice(0, lastItem).map((blog, index) => (
+                                                                <article data-aos="fade-up" data-aos-delay={100*index} key={blog._id} className="group flex flex-col overflow-hidden rounded-2xl border border-gray-800 bg-[#111827 transition-all duration-30 hover:-translate-y- hover:border-blue-500/5 hover:shadow-xl hover:shadow-blue-500/10">
                                                                     {/* Thumbnail */}
                                                                     <div className="relative h-52 sm:h-56 overflow-hidden">
                                                                         <img src={blog.thumbnail} alt={blog.title} className="h-full w-full object-covertransition-transform duration-500group-hover:scale-110" />
@@ -386,7 +386,7 @@ export default function Blogs() {
                                             }
                                         </>
                                     ) : (
-                                        <div className="w-full rounded-lg border border-dashed border-gray-800 bg-gray-950/40 p-8 text-center text-gray-400 transition-all duration-300 hover:border-[#3b82f6]/50">
+                                        <div data-aos="fade-up" className="w-full rounded-lg border border-dashed border-gray-800 bg-gray-950/40 p-8 text-center text-gray-400 transition-all duration-300 hover:border-[#3b82f6]/50">
                                             <span className="mb-3 block text-sm font-semibold uppercase tracking-wider text-[#3b82f6]">
                                                 Blog Coming Soon
                                             </span>

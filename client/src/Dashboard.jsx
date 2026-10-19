@@ -303,7 +303,7 @@ export default function Dashboard() {
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                             {/* HEADER */}
-                            <div className="mb-10">
+                            <div data-aos="fade-right" className="mb-10">
                                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight">
                                     Welcome Back,{" "}
                                     <span className="text-[#3b82f6]">
@@ -319,26 +319,26 @@ export default function Dashboard() {
                             {/* STATS */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-10">
 
-                                <div className="bg-[#111827] border border-gray-800 rounded-xl p-5">
+                                <div data-aos="fade-up" data-aos-delay={100} className="bg-[#111827] border border-gray-800 rounded-xl p-5">
                                     <h3 className="text-gray-400 text-sm">Total Messages</h3>
                                     <p className="text-2xl sm:text-3xl font-bold mt-2">
                                         {currentContactMessage.length + currentNormalMessage.length}
                                     </p>
                                 </div>
 
-                                <div className="bg-[#111827] border border-gray-800 rounded-xl p-5">
+                                <div data-aos="fade-up" data-aos-delay={200} className="bg-[#111827] border border-gray-800 rounded-xl p-5">
                                     <h3 className="text-gray-400 text-sm">Collaboration</h3>
                                     <p className="text-2xl sm:text-3xl font-bold mt-2">0</p>
                                 </div>
 
-                                <div className="bg-[#111827] border border-gray-800 rounded-xl p-5">
+                                <div data-aos="fade-up" data-aos-delay={300} className="bg-[#111827] border border-gray-800 rounded-xl p-5">
                                     <h3 className="text-gray-400 text-sm">Comments</h3>
                                     <p className="text-2xl sm:text-3xl font-bold mt-2">
                                         {allComments.length || 0}
                                     </p>
                                 </div>
 
-                                <div className="bg-[#111827] border border-gray-800 rounded-xl p-5">
+                                <div data-aos="fade-up" data-aos-delay={400} className="bg-[#111827] border border-gray-800 rounded-xl p-5">
                                     <h3 className="text-gray-400 text-sm">Liked Blogs</h3>
                                     <p className="text-2xl sm:text-3xl font-bold mt-2">
                                         {allLikedBlog.length || 0}
@@ -348,7 +348,7 @@ export default function Dashboard() {
                             </div>
 
                             {/* YOUR MESSAGES */}
-                            <div className="py-6 lg:py-10">
+                            <div data-aos="fade-up" className="py-6 lg:py-10">
 
                                 <h1 className="text-2xl sm:text-3xl font-bold mb-8">
                                     Your Messages
@@ -493,7 +493,7 @@ export default function Dashboard() {
                             </div>
 
                             {/* BLOG COMMENTS */}
-                            <div className="mt-10">
+                            <div data-aos="fade-up" className="mt-10">
 
                                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
 
@@ -561,7 +561,7 @@ export default function Dashboard() {
                             </div>
 
                             {/* LIKED BLOG */}
-                            <div className="mt-10">
+                            <div data-aos="fade-up" className="mt-10">
 
                                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
 

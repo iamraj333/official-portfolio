@@ -73,7 +73,7 @@ export default function Skills() {
       <div className="max-w-6xl mx-auto px-4">
 
         {/* Header */}
-        <div className="mb-14">
+        <div data-aos="fade-right" className="mb-14">
           <p className="text-blue-500 uppercase tracking-[0.3em] text-xs font-semibold mb-3">
             My Expertise
           </p>
@@ -90,7 +90,7 @@ export default function Skills() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
           {skillGroups.map((group, idx) => (
-            <div
+            <div data-aos="fade-up" data-aos-delay={100*idx}
               key={idx}
               className="
                 group relative
@@ -145,6 +145,7 @@ export default function Skills() {
 
                   {group.items.map((item, i) => (
                     <a
+                    data-aos="zoom-in" data-aos-delay={100*i}
                       href={`https://www.google.com/search?q=${item}`}
                       key={i}
                       className="
