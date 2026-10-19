@@ -4,6 +4,16 @@ import { Link } from 'react-router-dom';
 export default function Projects() {
   const customProjects = [
     {
+      title: "NestCare – Subscription-Based Home Care Platform",
+      desc: "Built a MERN stack platform with JWT authentication, RBAC, role-based dashboards, service booking, subscriptions, professional assignment, reviews, and dispute management. Integrated Razorpay for payments and Cloudinary for media storage.",
+      github: "https://github.com/iamraj333/Nestcare"
+    },
+    {
+      title: "PujaConnect – Online Pandit & Puja Booking Platform",
+      desc: "Developed a web platform for discovering and booking Pandits for religious ceremonies, featuring ritual exploration, Pandit profiles, booking management, Pandit booking requests, and admin verification.",
+      github: "https://github.com/iamraj333/PujaConnect"
+    },
+    {
       title: "Cleaning Service Platform",
       desc: "Developed a full-stack cleaning service web application with appointment booking, user authentication, email integration, and a blog management system for verified users using Django.",
       github: "https://github.com/iamraj333/Cleanza-Cleaning-Service-Provider-Platform-Django-"
@@ -16,12 +26,12 @@ export default function Projects() {
     {
       title: "Crane Service Website",
       desc: "Developed a responsive frontend website for a crane service company using HTML, CSS, and JavaScript, featuring service information, equipment showcase, contact forms, and an intuitive user interface.",
-      github: "https://github.com/your-username/crane-service-website"
+      github: "https://github.com/iamraj333/crane-service-website"
     },
     {
       title: "Employee Task Management System",
       desc: "Built a React-based task management application with role-based admin and employee dashboards, task assignment, progress tracking, and persistent data storage using LocalStorage.",
-      github: "https://github.com/your-username/employee-task-management"
+      github: "https://github.com/iamraj333/employee-task-management"
     }
   ];
 
@@ -31,8 +41,8 @@ export default function Projects() {
         <h2 data-aos="fade-up" className="text-2xl md:text-3xl font-bold tracking-tight mb-12">Featured Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {customProjects.map((project, index) => (
-            <div data-aos="fade-up" data-aos-delay={100*index} key={index} className='relative'>
-              <div  className=" relative w-full h-full z-[10] bg-[#111827] border border-gray-800 rounded-xl p-6 flex flex-col justify-between transition-all duration-300 md:hover:border-2 md:hover:-translate-y-2 md:hover:-translate-x-2">
+            <div data-aos="fade-up" data-aos-delay={100 * index} key={index} className='relative'>
+              <div className=" relative w-full h-full z-[10] bg-[#111827] border border-gray-800 rounded-xl p-6 flex flex-col justify-between transition-all duration-300 md:hover:border-2 md:hover:-translate-y-2 md:hover:-translate-x-2">
                 <div>
                   <h3 className="text-lg font-bold text-white mb-2">{project.title}</h3>
                   <p className="text-sm text-gray-400 leading-relaxed mb-4">{project.desc}</p>
