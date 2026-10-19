@@ -60,9 +60,9 @@ export default function Home() {
 
                             {
                                 (!adminToken || !userToken) ? (
-                                    <button onClick={myResumeBtn} className="px-6 py-3 rounded-lg bg-[#3b82f6] text-white font-medium hover:bg-[#2563eb] transition-colors text-sm shadow-lg shadow-[#3b82f6]/20">My Resume</button>
+                                    <button data-aos="zoom-in" data-aos-delay={100} onClick={myResumeBtn} className="px-6 py-3 rounded-lg bg-[#3b82f6] text-white font-medium hover:bg-[#2563eb] transition-colors text-sm shadow-lg shadow-[#3b82f6]/20">My Resume</button>
                                 ) : (
-                                    <a href="/myresume.pdf"
+                                    <a data-aos="zoom-in" data-aos-delay={100} href="/myresume.pdf"
                                         target="_blank"
                                         rel="noopener noreferrer" className="px-6 py-3 rounded-lg bg-[#3b82f6] text-white font-medium hover:bg-[#2563eb] transition-colors text-sm shadow-lg shadow-[#3b82f6]/20">
                                         My Resume
@@ -70,7 +70,7 @@ export default function Home() {
                                 )
                             }
 
-                            <Link
+                            <Link data-aos="zoom-in" data-aos-delay={200}
                                 to={"/contactUs"}
                                 className="px-6 py-3 rounded-lg border border-gray-700 text-gray-400 font-medium hover:border-[#3b82f6] hover:text-white transition-colors text-sm"
                             >
