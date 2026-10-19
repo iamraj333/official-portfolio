@@ -22,6 +22,7 @@ import NoBlogFound from './Blogs/NoBlogFound'
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react"
+import ScrollToTop from './ScrollToTop'
 
 function App() {
   // =========================== AOS ANIMATION ===========================================
@@ -38,6 +39,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+      <ScrollToTop/>
         <Routes>
           <Route path='/' element={<Home />}></Route>
           <Route path='/register' element={<Register />}></Route>
