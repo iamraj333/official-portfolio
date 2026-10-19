@@ -59,7 +59,7 @@ export default function Home() {
                         <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
 
                             {
-                                (!adminToken || !userToken) ? (
+                                (!adminToken && !userToken) ? (
                                     <button data-aos="zoom-in" data-aos-delay={100} onClick={myResumeBtn} className="px-6 py-3 rounded-lg bg-[#3b82f6] text-white font-medium hover:bg-[#2563eb] transition-colors text-sm shadow-lg shadow-[#3b82f6]/20">My Resume</button>
                                 ) : (
                                     <a data-aos="zoom-in" data-aos-delay={100} href="/myresume.pdf"
